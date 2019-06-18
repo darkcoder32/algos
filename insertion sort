@@ -1,0 +1,12 @@
+void insert(int arr[], int i)
+{
+    // Your code here  
+    int key=arr[i]; // ek key value select kr rhe hai basically
+    int j=i-1;    // key k sare left elements check krne k liye
+    while(j>=0 && arr[j]>key){ // j ki value decrement karenge tab tak usse
+            arr[j+1]=arr[j];   // lower wale sorting order mai na aa jaye
+            j--;
+    }
+    arr[j+1]=key;  // finally last jo bhi j ki value hai 
+                   // arr[j+1] mai assign kr denge
+}
