@@ -1,0 +1,23 @@
+void binSort(int arr[], int N)
+{
+   //Your code here
+   
+   int count_0=0,count_1=0;
+   for(int x=0;x<N;x++){
+       if(arr[x]==0){
+           count_0++;
+       }
+       else{
+           count_1++;
+       }
+   }
+   for(int x=0;x<N;x++){
+       if(count_0>0){
+           arr[x]=0;
+           count_0--;
+       }
+       else{
+           arr[x]=1;
+       }
+   }
+}
