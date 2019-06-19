@@ -1,0 +1,53 @@
+/*  Time complexity= O(mlogn)
+    Space Complexity=O(1);
+    
+void printIntersection(int arr1[], int arr2[], int N, int M) 
+{ 
+    //Your code here
+    int flag=0;
+    if(N>M){
+        M=unique(arr2,arr2+M)-arr2;
+        for(int i=0;i<M;i++){
+            if(binary_search(arr1,arr1+N,arr2[i])){
+                flag=1;
+                cout<<arr2[i]<<" ";
+            }
+        }
+        
+    }
+    else{
+        N=unique(arr1,arr1+N)-arr1;
+        for(int i=0;i<N;i++){
+            if(binary_search(arr2,arr2+M,arr1[i])){
+                flag=1;
+                cout<<arr1[i]<<" ";
+            }
+        }
+        
+    }
+    if(flag==0){
+        cout<<"-1";
+    }
+}*/
+
+
+/*  Time complexity=O(N+M)
+    Space Complexity=O(N);
+void printIntersection(int arr1[], int arr2[], int N, int M) 
+{ 
+    //Your code here
+    int arr3[100005]={0};
+    int flag=0;
+    for(int i=0;i<N;i++){
+        arr3[arr[i]]++;
+    }
+    for(int i=0;i<M;i++){
+        if(arr3[arr[i]]>0){
+            flag=1;
+            cout<<arr3[i]<<" ";
+        }
+    }
+    if(flag==0){
+        cout<<"-1";
+    }
+}*/
