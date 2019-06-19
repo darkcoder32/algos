@@ -1,7 +1,8 @@
-long long int merge(long long int arr[],long long int low,long long int high,long long int tmp[]){
-    long long int mid=low+(high-low)/2;
-    long long int c=0;
-    long long int i=low,k=low,j=mid+1;
+#define  ll long long int
+ll merge(ll arr[],ll low,ll high,ll tmp[]){
+    ll mid=low+(high-low)/2;
+    ll c=0;
+    ll i=low,k=low,j=mid+1;
     while(i<=mid && j<=high){
         if(arr[i]<=arr[j]){
             tmp[k++]=arr[i++];
@@ -22,19 +23,19 @@ long long int merge(long long int arr[],long long int low,long long int high,lon
     }
     return c;
 }
-long long int mergesort(long long int arr[],long long int low,long long int high,long long int tmp[]){
-    long long int c=0;
+ll mergesort(ll arr[],ll low,ll high,ll tmp[]){
+    ll c=0;
     if(low<high){
-        long long int mid=low+(high-low)/2;
+        ll mid=low+(high-low)/2;
         c+=mergesort(arr,low,mid,tmp);
         c+=mergesort(arr,mid+1,high,tmp);
         c+=merge(arr,low,high,tmp);
     }
     return c;
 }
-long long int inversionCount(long long int A[],long long int N)
+ll inversionCount(ll A[],ll N)
 {
     //Your code here
-    long long int tmp[N];
+    ll tmp[N];
     return mergesort(A,0,N-1,tmp);
 }
