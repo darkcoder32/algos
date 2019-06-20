@@ -1,0 +1,117 @@
+TIME COMPLEXTIY = O(>(m+n)*log(m+n)) // we can do better than this in time complexity by just as we do in two sorted arrays using extra space 
+SPACE COMPLEXTIY = O(size of 3 array)
+
+int nextgap(int n){
+    if(n<=1)
+        return 0;
+    return (n/2)+(n%2);
+}
+void merge(vector<int>&arr1, vector<int>&arr2, int n, int m) 
+{ 
+    int i,j,gap=n+m;
+    for(gap=nextgap(gap);gap>0;gap=nextgap(gap)){     //outer loop runs log(n+m) times
+        //compare elements in first array
+        for(i=0;i+gap<n;i++){
+            if(arr1[i]>arr1[i+gap]){
+                swap(arr1[i],arr1[i+gap]);
+            }
+        }
+        
+        //compare both arrays
+        for(j=gap>n?gap-n:0;i<n && j<m;i++,j++){
+            if(arr1[i]>arr2[j]){
+                swap(arr1[i],arr2[j]);
+            }
+        }
+        if(j<m){
+            for(j=0;j+gap<m;j++){ // j starts from 0 because there can be element which is smaller in last
+                if(arr2[j]>arr2[gap+j]){
+                    swap(arr2[j],arr2[j+gap]);
+                }
+            }
+        }    
+    }
+} 
+Vector mergeThree(Vector& A, Vector& B, Vector& C) 
+{ 
+    //Your code here
+    vector<int>v;
+    merge(A,B,A.size(),B.size());
+    for(int i=0;i<B.size();i++){
+        A.push_back(B[i]);
+    }
+    merge(A,C,A.size(),C.size());
+    for(int i=0;i<C.size();i++){
+        A.push_back(C[i]);
+    }
+    return A;
+} 
+
+
+/*
+Vector mergeThree(Vector& A, Vector& B, Vector& C) 
+{ 
+    //Your code here
+    vector<int>v;
+    int i=0,j=0,k=0;
+    while(i<A.size() && j<B.size() && k<C.size()){
+        int min_ele=min(A[i],B[j]);
+        min_ele=min(min_ele,C[k]);
+        if(min_ele==A[i]){
+            v.push_back(A[i]);
+            i++;
+        }
+        else if(min_ele==B[j]){
+            v.push_back(B[j]);
+            j++;
+        }
+        else if(min_ele==C[k]){
+            v.push_back(C[k]);
+            k++;
+        }
+    }
+    while(i<A.size() && j<B.size()){
+        int min_ele=min(A[i],B[j]);
+        if(min_ele==A[i]){
+            v.push_back(A[i]);
+            i++;
+        }
+        else if(min_ele==B[j]){
+            v.push_back(B[j]);
+            j++;
+        }
+    }
+    while(i<A.size() && k<C.size()){
+        int min_ele=min(A[i],C[k]);
+        if(min_ele==A[i]){
+            v.push_back(A[i]);
+            i++;
+        }
+        else if(min_ele==C[k]){
+            v.push_back(C[k]);
+            k++;
+        }
+    }
+    while(j<B.size() && k<C.size()){
+        int min_ele=min(B[j],C[k]);
+        if(min_ele==B[j]){
+            v.push_back(B[j]);
+            j++;
+        }
+        else if(min_ele==C[k]){
+            v.push_back(C[k]);
+            k++;
+        }
+    }
+    while(i<A.size()){
+        v.push_back(A[i++]);
+    }
+    while(j<B.size()){
+        v.push_back(B[j++]);
+    }
+    while(k<C.size()){
+        v.push_back(C[k++]);
+    }
+    return v;
+} 
+*/
