@@ -1,0 +1,43 @@
+TIME COMPLEXITY = O(logn)
+SPACE COMPLEXITY = O(1)
+//Closer Sorted: First array is sorted, but after sorting some elements are moved to either of the adjacent positions,
+//i.e, may be to the arr[i+1] or arr[i-1].
+
+int binary(int arr[],int beg,int end,int x){
+
+    if(end<beg){
+
+        return -1;
+
+    }
+
+    int mid=beg+(end-beg)/2;
+
+    if(arr[mid]==x){
+
+        return mid;
+
+    }
+    if(mid>beg && arr[mid-1]==x){
+        return mid-1;
+    }
+    if(mid<end && arr[mid+1]==x){
+        return mid+1;
+    }
+    else if(x<arr[mid]){
+
+        binary(arr,beg,mid-2,x);
+
+    }
+
+    else if(x>arr[mid]){
+
+        binary(arr,mid+2,end,x);
+
+    }
+
+}
+int closer(int arr[],int n, int x)
+{
+    return binary(arr,0,n-1,x);
+}
