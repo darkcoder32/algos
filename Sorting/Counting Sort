@@ -1,3 +1,6 @@
+TIME COMPLEXITY = O(length of array+max of input array)
+SPACE COMPLEXITY = O(max of input array)
+
 void countSort(char arr[])
 {
 // Your code goes here
