@@ -1,0 +1,21 @@
+TIME COMPLEXITY = O(n)
+SPACE COMPLEXITY = O(1)
+
+void first_repeating(int arr[],int n){
+        unordered_map<int,int>u_mp;
+        int c=INT_MAX;
+        for(int i=0;i<n;i++){
+            if(u_mp[arr[i]]>0){
+                if(u_mp[arr[i]]<c){
+                    c=u_mp[arr[i]];
+                } 
+            }
+            u_mp[arr[i]]=i+1;
+        }
+        if(c<INT_MAX){
+            cout<<c<<endl;
+        }
+        else{
+            cout<<"-1"<<endl;
+        }
+}
