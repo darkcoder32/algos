@@ -1,0 +1,17 @@
+TIME COMPLEXITY = O(n+m)
+SPACE COMPLEXITY = O(n)
+
+int intersection(int arr1[],int arr2[],int n,int m){
+    unordered_map<int,int>u_mp;
+    for(int i=0;i<n;i++){
+        u_mp[arr1[i]]++;
+    }
+    int c=0;
+    for(int i=0;i<m;i++){
+        if(u_mp[arr2[i]]>0){
+            u_mp[arr2[i]]=0;
+            c+=1;
+        }
+    }
+    return c;
+}
