@@ -1,0 +1,9 @@
+void separateChaining(vector<vector<int>> &hashTable,int hashSize,int arr[],int sizeOfArray)
+{
+   //Your code here
+   for(int i=0;i<sizeOfArray;i++){
+       int hashfun=arr[i]%hashSize;
+       hashTable[hashfun].push_back(arr[i]);
+       
+   }
+}
