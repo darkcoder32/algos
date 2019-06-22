@@ -1,0 +1,23 @@
+TIME COMPLEXITY = O(n)
+SPACE COMPLEXITY = O(n)
+
+void winner(string arr[],int n)
+{
+    //Your code here
+    unordered_map<string,int>mp;
+    string name;
+    int votes=INT_MIN;
+    for(int i=0;i<n;i++){
+        mp[arr[i]]++;
+        if(mp[arr[i]]>votes){
+            name=arr[i];
+            votes=mp[arr[i]];
+        }
+        else if(mp[arr[i]]==votes){
+            if(name>arr[i]){
+                name=arr[i];
+            }
+        }
+    }
+    cout<<name<<" "<<votes;
+}
