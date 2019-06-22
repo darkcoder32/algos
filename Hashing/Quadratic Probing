@@ -1,0 +1,35 @@
+void QuadraticProbing(int hash[],int hashSize,int arr[],int sizeOfArray)
+{
+    //Your code here
+    for(int i=0;i<sizeOfArray;i++){
+
+        int hashfun=arr[i]%hashSize;
+
+        if(hash[hashfun]!=-1){
+            int c=1;
+            int j=hashfun+c*c;
+
+            while(j%hashSize!=hashfun){
+
+                if(hash[j%hashSize]==-1){
+
+                    hash[j%hashSize]=arr[i];
+
+                    break;
+
+                }
+                c++;
+                j=hashfun+c*c;
+
+            }
+
+        }
+
+        else{
+
+            hash[hashfun]=arr[i];
+
+        }
+
+    }
+}
