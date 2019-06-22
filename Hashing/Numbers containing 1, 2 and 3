@@ -1,0 +1,51 @@
+TIME COMPLEXITY = O(nlogn) //because of sorting
+SPACE COMPLEXITY = O(n)
+
+int check(int n){
+        if(n==1 || n==2 || n==3){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+}
+
+int digit(int n,int res=0){
+    if(n<=0){
+        return res;
+    }
+    return digit(n/10,res+=check(n%10));
+}
+
+int main() {
+	//code
+	int t;
+	cin>>t;
+	while(t--){
+	    int n;
+	    cin>>n;
+	    int arr[n];
+	    for(int i=0;i<n;i++)
+	        cin>>arr[i];
+	    int flag=0;
+	    vector<int>v;
+	    for(int i=0;i<n;i++){
+	        int c=digit(arr[i]);
+	        if(c==floor(log10(arr[i]))+1){
+	            flag=1;
+	            v.push_back(arr[i]);
+	        }
+	    }
+	    if(flag==0){
+	        cout<<"-1";
+	    }
+	    else{
+	        sort(v.begin(),v.end());
+	        for(int i=0;i<v.size();i++){
+	            cout<<v[i]<<" ";
+	        }
+	    }
+	    cout<<endl;
+	}
+	return 0;
+}
