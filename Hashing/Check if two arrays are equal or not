@@ -1,0 +1,31 @@
+TIME COMPLEXITY = O(n)
+SPACE COMPLEXITY = O(n)
+
+int main() {
+	int t;
+	cin>>t;
+	while(t--){
+	    int n;
+	    cin>>n;
+	    int c=0,item;
+	    unordered_map<int,int>mp;
+	    for(int i=0;i<n;i++){
+	        cin>>item;
+	        mp[item]+=1;
+	    }
+	    for(int i=0;i<n;i++){
+	        cin>>item;
+	        if(mp[item]>0){
+	            c++;
+	            mp[item]--;
+	        }
+	    }
+	    if(c==n){
+	        cout<<"1"<<endl;
+	    }
+	    else{
+	        cout<<"0"<<endl;
+	    }
+	}
+	return 0;
+}
