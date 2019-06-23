@@ -1,0 +1,29 @@
+TIME COMPLEXITY = O(nlogn) // bc of sorting
+SPACE COMPLEXITY = O(n)
+
+bool sortbysecdesc(const pair<int,int> &a, 
+				const pair<int,int> &b) 
+{   if (a.second != b.second)  
+        return a.second>b.second; 
+    else
+        return a.first<b.first;
+}
+void sortByFreq(int arr[],int n)
+{
+    //Your code here
+    map<int,int>mp;
+    for(int i=0;i<n;i++){
+        mp[arr[i]]++;
+    }
+    vector<pair<int,int> >v;
+    for(auto x=mp.begin();x!=mp.end();x++){
+        v.push_back(make_pair(x->first,x->second));
+    }
+    sort(v.begin(),v.end(),sortbysecdesc);
+    for(auto x=v.begin();x!=v.end();x++){
+        int p=x->second;
+        while(p--){
+            cout<<x->first<<" ";
+        }
+    }
+}
