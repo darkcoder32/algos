@@ -1,0 +1,22 @@
+Time Complexity = O(n)
+Space Complexity = O(n)
+
+
+int trappingWater(int arr[], int n){
+    // Your code here
+     int Lmax[n],Rmax[n];
+     Lmax[0]=arr[0];
+     Rmax[n-1]=arr[n-1];
+     for(int i=1;i<n;i++){
+         Lmax[i]=max(Lmax[i-1],arr[i]);
+     }
+     for(int i=n-2;i>-1;i--){
+         Rmax[i]=max(Rmax[i+1],arr[i]);
+     }
+     int c=0;
+     for(int i=0;i<n;i++){
+         int min1=min(Lmax[i],Rmax[i]);
+         c+=min1-arr[i];
+     }
+     return c;
+}

@@ -1,0 +1,12 @@
+Time Complexity = O(n)
+Space Complexity = O(1)
+
+vector<long long> reverseInGroups(vector<long long> mv, int n, int k){
+    int mul=n/k;
+    // your code here
+    for(int i=0;i<mul;i++){
+        reverse(mv.begin()+k*i,mv.begin()+k*(i+1));
+    }
+    reverse(mv.begin()+mul*k,mv.begin()+n);
+    return mv;
+}

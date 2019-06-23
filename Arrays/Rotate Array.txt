@@ -1,0 +1,19 @@
+Time Complexity = O(n)
+Space Complexity = O(1)
+
+void reverse(int arr[],int low,int n){
+    int high=n-1;
+    while(low<high){
+        swap(arr[low],arr[high]);
+        low+=1;
+        high-=1;
+    }
+}
+void rotateArr(int arr[], int d, int n){
+    
+   // Your code here
+   reverse(arr,0,d);
+   reverse(arr,d,n);
+   reverse(arr,0,n);
+    
+}

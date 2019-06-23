@@ -1,0 +1,15 @@
+Time Complexity = O(n)
+Space Complexity = O(1)
+
+
+void printfrequency(int arr[], int n)
+{ 
+	// Your code herre
+	int x=n+1;
+	for(int i=0;i<n;i++){
+	    arr[arr[i]%x-1]+=x;
+	}
+	for(int i=0;i<n;i++){
+	    cout<<arr[i]/x<<" ";
+	}
+} 

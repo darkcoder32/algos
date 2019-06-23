@@ -1,0 +1,26 @@
+Time Complexity = O(n)
+Space Complexity = O(1)
+
+int minAdjDiff(int arr[], int n){    
+    int diff=INT_MAX;
+    int tmp;
+    // Your code here
+    for(int i=0;i<n;i++){
+        if(n<=1){
+            return arr[0];
+        }
+        if(i==n-1){
+            tmp=abs(arr[n-1]-arr[0]);
+            if(tmp<diff){
+                diff=tmp;
+            }
+        }
+        else{
+            tmp=abs(arr[i]-arr[i+1]);
+            if(tmp<diff){
+                diff=tmp;
+            }
+        }
+    }
+    return diff;
+}

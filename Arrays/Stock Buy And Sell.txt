@@ -1,0 +1,38 @@
+Time Complexity = O(n)
+Space Complexity = O(n)
+
+
+void stockBuySell(int price[], int n)
+{
+    
+    // Your code here
+    vector<int>v_min;
+    vector<int>v_max;
+    for(int i=0;i<n-1;i++){
+        if((i==0 && price[i]<price[i+1])){
+            v_min.push_back(i);
+        }
+        else{
+            if(price[i]<price[i+1] && price[i]<price[i-1]){
+                v_min.push_back(i);
+            }
+        }
+    }
+    for(int i=1;i<n;i++){
+        if((i==n-1 && price[i]>price[i-1])){
+            v_max.push_back(i);
+        }
+        else{
+            if(price[i]>price[i+1] && price[i]>price[i-1]){
+                v_max.push_back(i);
+            }
+        }
+    }
+    int x=min(v_min.size(),v_max.size());
+    if(x==0){
+        cout<<"No Profit";
+    }
+    for(int i=0;i<x;i++){
+        cout<<"("<<v_min[i]<<" "<<v_max[i]<<")"<<" ";
+    }
+}

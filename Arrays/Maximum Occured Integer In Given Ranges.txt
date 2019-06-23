@@ -1,0 +1,22 @@
+Time Complexity = O(maximum element)
+Space Complexity = O(1)
+
+int maxOccured(int L[], int R[], int n, int maxx){
+    // Your code here
+    int arr[1000000];
+    memset(arr,0,sizeof(arr));
+    for(int i=0;i<n;i++){
+        arr[L[i]]+=1;
+        arr[R[i]+1]-=1;
+    }
+    int index;
+    int min=arr[0];
+    for(int i=1;i<maxx;i++){
+        arr[i] += arr[i - 1]; 
+        if (min < arr[i]) { 
+            min = arr[i]; 
+            index = i; 
+        } 
+    }
+    return index;
+}

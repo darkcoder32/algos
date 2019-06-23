@@ -1,0 +1,14 @@
+Time Complexity = O(n)
+Space Complexity = O(1)
+
+void arrayReversal(int arr[],int sizeOfArray) 
+{
+   //Write your code here
+   int low=0;
+   int high=sizeOfArray-1;
+   while(low<high){
+       swap(arr[low],arr[high]);
+       low+=1;
+       high-=1;
+   }
+}

@@ -1,0 +1,31 @@
+Time Complexity = O(nlogn) //due to sorting
+Space Complexity = O(n)
+
+
+int missingNumber(int arr[], int n) { 
+    
+    // Your code here
+    sort(arr,arr+n);
+    int j=1;
+    
+    for(int i=0;i<n-1;i++){
+        if(arr[i]<=0){
+            continue;
+        }
+        else{
+            if(arr[i]==j){
+                if(arr[i]!=arr[i+1]){
+                    j++;
+                    continue;
+                }
+                else{
+                    continue;
+                }
+            }
+            else{
+                return j;
+            }
+        }
+    }
+    return j;
+} 

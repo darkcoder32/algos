@@ -1,0 +1,58 @@
+Time Complexity = O(n)
+Space Complexity = O(1)
+
+
+bool checkRotatedAndSorted(int arr[], int num){
+    
+    // Your code here
+    if(num<=2){
+        return false;
+    }
+    int max_ele=INT_MIN,min_ele=INT_MAX;
+    int max_ind=-1,min_ind=-1;
+    for(int i=0;i<num;i++){
+        if(max_ele<arr[i]){
+            max_ele=arr[i];
+            max_ind=i;
+        }
+        if(min_ele>arr[i]){
+            min_ele=arr[i];
+            min_ind=i;
+        }
+    }
+    if((min_ind-max_ind)==1){
+        for(int i=0;i<max_ind;i++){
+            if(arr[i]>arr[i+1]){
+                return false;
+            }
+        }
+        for(int i=min_ind;i<num-1;i++){
+            if(arr[i]>arr[i+1]){
+                return false;
+            }
+        }
+        if(arr[num-1]>arr[0]){
+            return false;
+        }
+        return true;
+    }
+    else if((min_ind-max_ind)==-1){
+        for(int i=0;i<min_ind;i++){
+            if(arr[i]<arr[i+1]){
+                return false;
+            }
+        }
+        for(int i=max_ind;i<num-1;i++){
+            if(arr[i]<arr[i+1]){
+                return false;
+            }
+        }
+        if(arr[num-1]<arr[0]){
+            return false;
+        }
+        return true;
+    }
+    else{
+        return false;
+    }
+}
