@@ -1,11 +1,14 @@
-long long factorial (int N)
+TIME COMPLEXITY = O(n)
+SPACE COMPLEXITY = O(1)
+
+/*long long factorial (int N) //Complexity of Function is O(nlogn)=O(n!)
 {
     //Your code here
     if(N==1 || N==0){
         return 1;
     }
     return N*factorial(N-1);
-}
+}*/
 int digitsInFactorial(int N)
 {
     //Your code here
