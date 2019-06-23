@@ -1,0 +1,32 @@
+Time Complexity = O(1+n1+n2..nn) where n1,n2.. are length of total word in given pad
+Space Complexity = O(n^2)
+
+
+void findAllCombinations(vector<char>keypad[],int a[],string S,int N,vector<string>&v){
+    if(N==-1){
+        v.push_back(S);
+        return;
+    }
+    int digit=a[N];
+    int len=keypad[digit].size();
+    for(int i=0;i<len;i++){
+        findAllCombinations(keypad,a,keypad[digit][i]+S,N-1,v);
+    }
+}
+void possibleWords(int a[],int N)
+{
+    //Your code here
+    vector<char>keypad[]=
+    {
+        {},{},{'a','b','c'},{'d','e','f'},{'g','h','i'},
+        {'j','k','l'},{'m','n','o'},{'p','q','r','s'},
+        {'t','u','v'},{'w','x','y','z'}
+    };
+    string S="";
+    vector<string>v;
+    findAllCombinations(keypad,a,S,N-1,v);
+    sort(v.begin(),v.end());
+    for(x:v){
+        cout<<x<<" ";
+    }
+}

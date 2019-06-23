@@ -1,0 +1,24 @@
+Time Complexity = O(logn)
+Space Complexity = O(1)
+
+int countDigits(int n)
+{
+   //Your code here
+   return floor(log10(n))+1;
+}
+int sumOfDigits(int n)
+{
+    if(n==0){
+        return 0;
+    }//Your code here
+    return n%10+sumOfDigits(n/10);
+}
+int digitalRoot(int n)
+{
+    //Your code here
+    if(countDigits(n)==1){
+        return n;
+    }
+    n=sumOfDigits(n);
+    digitalRoot(n);
+}

@@ -1,0 +1,25 @@
+Time Complexity = O(logn)  
+Space Complexity = O(1)
+
+int power(int N,int R)
+{
+   //Your code here
+   
+   if(R==0){
+       return 1;
+   }
+   if(R%2==1){
+       int x=((long)(N%mod)*(power(N,R-1)%mod))%mod;
+       if(x<0){
+            x=(x+mod)%mod;
+           return x;
+       }
+   }
+   else{
+       int q=((long)(power(N,R/2)%mod)*(power(N,R/2)%mod))%mod;
+       if(q<0){
+            q=(q+mod)%mod;
+           return q;
+       }
+   }
+}

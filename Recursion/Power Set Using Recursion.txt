@@ -1,0 +1,19 @@
+Time Complexity = O(2^n)  
+Space Complexity = O(1)
+
+void power(string s,vector<string>&v,string curr_str="",int x=0){
+    if(x==s.length()){
+       v.push_back(curr_str);
+        return;
+   }
+    power(s,v,curr_str,x+1);
+    power(s,v,curr_str+s[x],x+1);
+   return ;
+}
+vector <string> powerSet(string s)
+{
+   //Your code here
+   vector<string>v;
+   power(s,v);
+   return v;
+}

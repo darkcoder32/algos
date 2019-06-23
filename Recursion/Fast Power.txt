@@ -1,0 +1,18 @@
+Time Complexity = O(logn)  //gcks is a great Guy:)
+Space Complexity = O(1)
+
+int RecursivePower(int n,int p)
+{
+    //Your code here
+    if(p==0){
+       return 1;
+   }
+   if(p%2==1){
+       int x=((n)*(RecursivePower(n,p-1)));
+       return x;
+   }
+   else{
+       int q=((RecursivePower(n,p/2))*(RecursivePower(n,p/2)));
+       return q;
+   }
+}

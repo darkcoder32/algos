@@ -1,0 +1,13 @@
+Time Complexity = O(2^n)
+Space Complexity = O(1)
+
+void toh(int N, int from, int to, int aux, long long &moves) {
+    // Your code here
+    if(N==0){
+        return;
+    }
+    toh(N-1,from,aux,to,moves);
+    cout<<"move disk "<<N<<" from rod "<<from<<" to rod "<<to<<endl;
+    moves++;
+    toh(N-1,aux,to,from,moves);
+}
