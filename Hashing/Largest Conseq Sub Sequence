@@ -1,0 +1,24 @@
+TIME COMPLEXITY = O(n)
+SPACE COMPLEXITY = O(n)
+
+int findLongestConseqSubseq(int arr[], int n)
+{
+  //Your code here
+  vector<int>v;
+  for(int i=0;i<n;i++){
+      v.push_back(arr[i]);
+  }
+  sort(v.begin(),v.end());
+  int curr_max=0;
+  int max_so_far=0;
+  for(int i=0;i<v.size()-1;i++){
+      if(v[i]+1==v[i+1]){
+          curr_max=curr_max+1;
+      }
+      else{
+          curr_max=0;
+      }
+      max_so_far=max(max_so_far,curr_max);
+  }
+  return max_so_far+1;
+}
