@@ -1,0 +1,12 @@
+long long int binarySubstring(int n, string a){
+    
+    // Your code here
+    int no_of_1=0;
+    int len=a.length();
+    for(int i=0;i<len;i++){
+        if(a[i]=='1'){
+            no_of_1++;
+        }
+    }
+    return (no_of_1)*(no_of_1-1)/2;
+}
