@@ -1,0 +1,26 @@
+void keypaid_typing(string str,int count[]){
+    for(int i=0;i<str.length();i++){
+        cout<<count[str[i]-'a'];
+    }
+}
+int main() {
+	int t;
+	cin>>t;
+	int count[26]={0};
+	int k=0;
+	for(int i=2;i<=9;i++){
+	    count[k++]=i;
+	    count[k++]=i;
+	    count[k++]=i;
+	    if(i==7 || i==9){
+	        count[k++]=i;
+	    }
+	}
+	while(t--){
+	    string str;
+	    cin>>str;
+	    keypaid_typing(str,count);
+	    cout<<endl;
+	}
+	return 0;
+}
