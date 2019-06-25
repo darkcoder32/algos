@@ -1,0 +1,16 @@
+Time Complexity = O(n)
+
+char nonrepeatingCharacter(string str)
+{
+   //Your code here
+   int count[256]={0};
+   for(int i=0;i<str.length();i++){
+       count[str[i]]++;
+   }
+   for(int i=0;i<str.length();i++){
+       if(count[str[i]]==1){
+           return str[i];
+       }
+   }
+   return '$';
+}
