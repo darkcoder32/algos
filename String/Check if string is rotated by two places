@@ -1,0 +1,22 @@
+Time Complexity = O(length of string1 + length of string2)
+
+void reverse(char arr[],int beg,int end){
+    while(beg<end){
+        swap(arr[beg++],arr[end--]);
+    }
+}
+bool isRotated(string str1, string str2)
+{
+    // Your code here
+    string str3=str1;
+    reverse(str1.begin(),str1.begin()+2);
+    reverse(str1.begin()+2,str1.end());
+    reverse(str1.begin(),str1.end());
+    reverse(str3.begin(),str3.end()-2);
+    reverse(str3.end()-2,str3.end());
+    reverse(str3.begin(),str3.end());
+    if(str1==str2 || str3==str2){
+        return true;
+    }
+    return false;
+}
