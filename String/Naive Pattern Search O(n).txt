@@ -1,0 +1,23 @@
+Time Complexity = O(n)
+Space Complexity = O(1)
+
+bool search(string pat, string txt) 
+{ 
+	
+	// Your code here
+	int n=txt.length();
+	int m=pat.length();
+	for(int i=0;i<=n-m;i++){
+	    int c=0;
+	    for(int j=0;j<m;j++){
+	        if(txt[i+j]!=pat[j]){
+	            break;
+	        }
+	        c++;
+	    }
+	    if(c==m){
+	        return true;
+	    }
+	}
+	return false;
+}
