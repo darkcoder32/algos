@@ -1,0 +1,19 @@
+Time Complexity = O(n)
+
+int findSum(string str)
+{
+	
+	// Your code here
+	int place=1,sum=0;
+	for(int i=str.length()-1;i>=0;i--){
+	    if(str[i]>57){
+	        place=1;
+	        continue;
+	    }
+	    else{
+	        sum+=place*(str[i]-48);
+	        place*=10;
+	    }
+	}
+	return sum;
+}
