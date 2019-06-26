@@ -1,0 +1,23 @@
+Time Complexity = O(n)
+
+int modified (string str){
+    int curr_count=0;
+    int ans=0;
+    char ch;
+    for(int i=0;i<str.length();){
+        if(curr_count==0){
+            ch=str[i];
+        }
+        else if(ch!=str[i]){
+            ans+=(curr_count-1)/2;
+            curr_count=0;
+            ch=str[i];
+        }
+        curr_count++;
+        i++;
+        if(i==str.length()){
+            ans+=(curr_count-1)/2;
+        }
+    }
+    return ans;
+}
