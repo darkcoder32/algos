@@ -1,0 +1,32 @@
+Time Complexity = O(nlogn)  //due to sorting
+
+string caseSort(string str, int n){
+    
+    // your code here
+    int ul[n];
+    vector<char>upper;
+    vector<char>lower;
+    for(int i=0;i<n;i++){
+        if(str[i]<97){
+            upper.push_back(str[i]);
+            ul[i]=1;
+        }
+        else{
+            lower.push_back(str[i]);
+            ul[i]=-1;
+        }
+    }
+    string ans="";
+    sort(lower.begin(),lower.end());
+    sort(upper.begin(),upper.end());
+    int l=0,u=0;
+    for(int i=0;i<n;i++){
+        if(ul[i]==-1){
+            ans+=lower[l++];
+        }
+        else{
+            ans+=upper[u++];
+        }
+    }
+    return ans;
+}
