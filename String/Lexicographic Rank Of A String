@@ -1,0 +1,30 @@
+Time Complexity = O(n)
+
+#define ll long long
+ll factorial(int n,ll res=1){
+    if(n==1 || n==0){
+        return res;
+    }
+    factorial(n-1,res*=n);
+}
+int findRank(string str) 
+{
+    int count[256]={0};
+    for(int i=0;i<str.length();i++){
+        count[str[i]]++;
+        if(count[str[i]]>1) return 0;
+    }
+    ll fact=factorial(str.length());     
+    for(int i=1;i<256;i++){
+        count[i]+=count[i-1];
+    }
+    ll rank=0;
+    for(int i=0;i<str.length();i++){
+        fact=fact/(str.length()-i);
+        rank+=count[str[i]-1]*fact;
+        for(int j=str[i];j<256;j++){     // O(1) operation
+            count[j]--;
+        }
+    }
+    return rank+1;
+}
