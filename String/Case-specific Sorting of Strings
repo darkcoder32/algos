@@ -1,4 +1,5 @@
 Time Complexity = O(nlogn)  //due to sorting
+Space Complexity = O(n)
 
 string caseSort(string str, int n){
     
