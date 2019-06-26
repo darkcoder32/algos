@@ -1,0 +1,31 @@
+string smallestWindow (string s, string pat){
+    // Your code here
+    if(pat.length()>s.length()){
+        return "-1";
+    }
+    int count[256]={0};
+    for(int i=0;i<pat.length();i++){
+        count[pat[i]]++;
+    }
+    int l=0,r=0,i=0,j=0,missing=pat.length();
+    while(r<s.length()){
+        if(count[s[r]]>0){
+            missing-=1;
+        }
+        count[s[r]]--;
+        r+=1;
+        while(missing==0){
+            if(j==0 || r-l<j-i){
+                i=l;
+                j=r;
+            }
+            count[s[l]]+=1;
+            if(count[s[l]]>0){
+                missing+=1;
+            }
+            l+=1;
+        }
+    }
+    if(i==0 && j==0) return "-1";
+    return s.substr(i,j-i);
+}
