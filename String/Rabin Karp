@@ -1,0 +1,43 @@
+Time Complexity = O(NM) worst case
+                  O(N+M)  average and best case
+
+#define d 256 
+/* pat -> pattern 
+	txt -> text 
+	q -> A prime number 
+*/
+bool search(string pat, string txt, int q) 
+{ 
+	// Your code here
+	int n=txt.length();
+	int m=pat.length();
+	int hash_value_txt=0;
+	int hash_value_pat=0;
+	int h=1,i,j;
+    for(int i=0;i<m-1;i++){
+        h=(h*d)%q;              //h=d^(m-1)
+    }
+    for(int i=0;i<m;i++){
+        hash_value_txt=(d*hash_value_txt+txt[i])%q;
+        hash_value_pat=(d*hash_value_pat+pat[i])%q;
+    }
+    for(i=0;i<=n-m;i++){
+        if(hash_value_txt==hash_value_pat){
+            for(j=0;j<m;j++){
+                if(txt[i+j]!=pat[j]){
+                    break;
+                }
+            }
+            if(j==m){
+                return true;
+            }
+        }
+        if(i<n-m){
+            hash_value_txt=(d*(hash_value_txt-txt[i]*h)+txt[i+m])%q;
+            if(hash_value_txt<0){
+                hash_value_txt+=q;
+            }
+        }
+    }
+    return false;
+} 
