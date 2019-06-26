@@ -1,0 +1,27 @@
+Time Complexity = O(n+m)
+
+void printMinIndexChar(string str, string patt)
+{
+    // Your code here
+    int count[256];
+    memset(count,-1,sizeof(count));
+    int min=INT_MAX;
+    for(int i=0;i<str.length();i++){
+        if(count[str[i]]==-1){
+            count[str[i]]=i;
+        }
+    }
+    for(int i=0;i<patt.length();i++){
+        if(count[patt[i]]!=-1){
+            if(min>count[patt[i]]){
+                min=count[patt[i]];
+            }
+        }
+    }
+    if(min==INT_MAX){
+        cout<<"No character present";
+    }
+    else{
+        cout<<str[min];
+    }
+}
