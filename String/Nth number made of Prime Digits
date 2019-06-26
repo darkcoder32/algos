@@ -1,0 +1,25 @@
+Time Complexity = O(logn)
+
+void print(int n,string num=""){
+    if(n==0){
+        cout<<num<<endl;
+        return;
+    }
+    int rem=n%4;
+    switch(rem){
+        case 0: 
+            num="7"+num;
+            n=n-1;
+            break;
+        case 1: 
+            num="2"+num;
+            break;
+        case 2: 
+            num="3"+num;
+            break;
+        case 3: 
+            num="5"+num;
+            break;
+    }
+    print(n/4,num);
+}
