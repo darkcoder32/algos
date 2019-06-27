@@ -1,0 +1,22 @@
+Time Complexity = O(n)
+
+Node* insertInMiddle(Node* head, int x)     //Insert at middle in one Traversal
+{
+	// Cpde here
+	Node *newnode=new Node(x);
+	if(head==NULL){
+	    head=newnode;
+	    return head;
+	}
+	Node *slow=head;
+	Node *fast=head;
+	while(fast->next!=NULL){
+	    fast=fast->next->next;
+	    if(fast==NULL)
+	        break;
+	    slow=slow->next;
+	}
+	newnode->next=slow->next;
+	slow->next=newnode;
+	return head;
+}
