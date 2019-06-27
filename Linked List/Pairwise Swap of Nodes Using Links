@@ -1,0 +1,33 @@
+Time Complexity = O(n);
+
+Node* pairwise_swap(struct Node *head)
+{
+   // The task is to complete this method
+   if(head==NULL || head->next==NULL){
+      return head;
+   }
+  
+  Node *prev=NULL;
+  Node *curr=head;
+  Node *ahead=head->next;
+  
+  head=head->next;
+  
+  while(1){
+      
+      curr->next=ahead->next;
+      ahead->next=curr;
+      
+      if(prev!=NULL){
+          prev->next=ahead;
+      }
+      
+      prev=curr;
+      curr=curr->next;
+      if(curr==NULL) break;
+      ahead=curr->next;
+      if(ahead==NULL) break;
+  }
+  
+  return head;
+}
