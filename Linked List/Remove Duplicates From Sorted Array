@@ -1,0 +1,21 @@
+Time Complexity = O(n)  ,, one traversal
+
+Node *removeDuplicates(Node *root)
+{
+ // your code goes here
+ Node *node=root;
+ if(root==NULL || root->next==NULL){
+     return root;
+ }
+ while(node->next!=NULL){
+     if(node->data==node->next->data){
+         Node *tmp=node->next;
+         node->next=node->next->next;
+         free(tmp);
+     }
+     else{
+         node=node->next;
+     }
+ }
+ return root;
+}
