@@ -1,0 +1,17 @@
+Time Complexity = O(n)
+
+void addNode(Node *head, int pos, int data)
+{
+   // Your code here
+   Node *newnode=new Node(data);
+   Node *node=head,*last=NULL;
+   while(pos!=0){
+       last=node;
+       node=node->next;
+       pos--;
+   }
+   newnode->next=node->next;
+   node->next=newnode;
+   newnode->prev=node;
+   return;
+}
