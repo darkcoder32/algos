@@ -1,0 +1,26 @@
+Time Complexity = O(n)  //one traversal hashing solution  Space Complexity = extra array for hashing
+/* Another solution is sort the list using merge sort and then remove duplicates from sorted linked list 
+complexity of this approach O(nlogn) but with space complexity O(1)*/
+
+Node *removeDuplicates(Node *root)
+{
+ // your code goes here
+ if(root==NULL)return root;
+ int mp[10005]={0};
+ Node *node=root;
+ Node *prev=NULL;
+ while(node!=NULL){
+    if(mp[node->data]==1){
+        Node *tmp=node;
+        prev->next=node->next;
+        node=node->next;
+        free(tmp);
+    }
+    else{
+        mp[node->data]=1;
+        prev=node;
+        node=node->next;
+    }
+ }
+ return root;
+}
