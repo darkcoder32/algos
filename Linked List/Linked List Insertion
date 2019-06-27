@@ -1,0 +1,22 @@
+Node *insertAtBegining(Node *head, int newData) {          //Time Complexity = O(1)
+   // Your code here
+   Node *newnode=new Node(newData);
+   newnode->next=head;
+   head=newnode;
+   return head;
+}
+// function appends the data at the end of the list
+Node *insertAtEnd(Node *head, int newData)  {             //Time Complexity = O(n)
+   // Your code here
+   Node *newnode=new Node(newData);
+   Node *node=head;
+   if(node==NULL){
+       head=newnode;
+       return head;
+   }
+   while(node->next!=NULL){
+       node=node->next;
+   }
+   node->next=newnode;
+   return head;
+}
