@@ -1,0 +1,10 @@
+Time Complexity = O(1)
+
+void deleteNode(Node *node)
+{
+   // Your code here
+   node->data=node->next->data;
+   Node *tmp=node->next;
+   node->next=node->next->next;
+   free(tmp);
+}
