@@ -1,0 +1,13 @@
+Time Complexity = O(n)
+Space Complexity = O(1)
+
+int getCount(struct Node* head){
+    //Code here
+    Node *node=head;
+    int c=0;
+    while(node!=NULL){
+        c++;
+        node=node->next;
+    }
+    return c;
+}
