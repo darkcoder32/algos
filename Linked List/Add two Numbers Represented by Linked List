@@ -1,0 +1,26 @@
+Time Complexity = O(n+m)
+
+Node* addTwoLists(Node* first, Node* second) {
+    // Code here
+    int carry=0;
+    Node *ptr1=first,*ptr2=second,*head3,*prev=NULL;
+    while(ptr1 || ptr2){
+        int sum=carry+(ptr1?ptr1->data:0)+(ptr2?ptr2->data:0);
+        if(sum>=10) carry=1;
+        else carry=0;
+        sum=sum%10;
+        Node *newnode=new Node(sum);
+        if(prev==NULL){
+            head3=newnode;
+        }
+        else{prev->next=newnode;}
+        prev=newnode;
+        if(ptr1) ptr1=ptr1->next;
+        if(ptr2) ptr2=ptr2->next;
+    }
+    if(carry==1){
+        Node *newnode=new Node(1);
+        prev->next=newnode;
+    }
+    return head3;
+}
