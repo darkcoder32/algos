@@ -1,0 +1,24 @@
+Time Complexity = O(n)
+
+Node* rotate(Node* head, int k) {
+    // Your code here
+    if(head==NULL) return head;
+    Node *node=head;
+    Node *ptr=head;
+    for(int i=2;i<=k+1  && ptr;i++){
+        ptr=ptr->next;
+    }
+    if(ptr==NULL) return head;
+    Node *new_head=ptr;
+    while(ptr->next){
+        ptr=ptr->next;
+    }
+    for(int i=0;i<k && ptr &&node;i++){
+        ptr->next=node;
+        ptr=node;
+        node=node->next;
+    }
+    ptr->next=NULL;
+    head=new_head;
+    return head;
+}
