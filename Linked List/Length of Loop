@@ -1,0 +1,21 @@
+Time Complexity = O(n)
+
+int countNodesinLoop(struct Node *head)
+{
+     // Code here
+     if(head==NULL) return 0;
+     Node *x=head,*y=head;
+     int c=0;
+     while(x && y && y->next){
+         x=x->next;
+         y=y->next->next;
+         if(x==y){
+            do{
+                x=x->next;
+                c++;
+            }while(x!=y);
+            return c;
+         }
+     }
+     return 0;
+}
