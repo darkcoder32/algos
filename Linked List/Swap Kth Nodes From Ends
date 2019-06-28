@@ -1,0 +1,41 @@
+Time Complexity = O(n)
+
+Node *swapkthnode(Node* head, int n, int k)
+{
+    // Your Code here
+    if(n<k) return head;
+    if(2*k-1==n) return head;
+    Node *x,*y,*x_prev,*y_prev;
+    
+    x=head,x_prev=NULL;
+    for(int i=2;i<=k;i++){
+        x_prev=x;
+        x=x->next;
+    }
+    
+    y=head,y_prev=NULL;
+    for(int i=2;i<=n-k+1;i++){
+        y_prev=y;
+        y=y->next;
+    }
+    
+    if(x_prev){
+        x_prev->next=y;
+    }
+    
+    if(y_prev){
+        y_prev->next=x;
+    }
+    
+    Node* tmp=x->next;
+    x->next=y->next;
+    y->next=tmp;
+    
+    if(k==1){
+        head=y;
+    }
+    if(k==n){
+        head=x;
+    }
+    return head;
+}
