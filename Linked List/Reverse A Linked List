@@ -1,0 +1,17 @@
+Time Complexity = O(n)
+
+Node* reverseList(Node *head)
+{
+  // Your code here
+  if(head==NULL) return head;
+  if(head->next==NULL) return head;
+  Node *x=head,*x_prev=NULL;
+  while(x!=NULL){
+      Node* tmp=x->next;
+      x->next=x_prev;
+      x_prev=x;
+      x=tmp;
+  }
+  head=x_prev;
+  return x_prev;
+}
