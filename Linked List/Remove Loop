@@ -1,0 +1,28 @@
+Time Complexity = O(n)
+
+void remove_loop(Node *head, Node *x){
+    Node *ptr=head;
+    Node *prev=NULL;
+    while(x && ptr && ptr->next){
+        prev=x;
+        x=x->next;
+        ptr=ptr->next;
+        if(ptr==x){
+            prev->next=NULL;
+            return;
+        }
+    }
+}
+void removeTheLoop(Node *head)
+{
+     //Your code here
+     if(head==NULL) return;
+     Node *x=head,*y=head;
+     while(x && y && y->next){
+         x=x->next;
+         y=y->next->next;
+         if(x==y){
+            remove_loop(head,x);
+         }
+     }
+}
