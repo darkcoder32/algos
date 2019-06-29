@@ -1,0 +1,71 @@
+Time Complexity = O(n) 
+Space Complexity = O(1)
+
+bool compareList(Node *head1,Node *head2){
+    if(head1==NULL || head2==NULL) return false;
+    Node *ptr1=head1,*ptr2=head2;
+    while(ptr1 && ptr2){
+        if(ptr1->data == ptr2->data){
+            ptr1=ptr1->next;
+            ptr2=ptr2->next;
+        }
+        else{
+            return false;
+        }
+    }
+    if(ptr1 || ptr2) return false;
+    
+    return true;
+}
+Node* reverse(Node *head)
+
+{
+
+  // Your code here
+
+  if(head==NULL) return head;
+
+  if(head->next==NULL) return head;
+
+  Node *x=head,*x_prev=NULL;
+
+  while(x!=NULL){
+
+      Node* tmp=x->next;
+
+      x->next=x_prev;
+
+      x_prev=x;
+
+      x=tmp;
+
+  }
+
+  head=x_prev;
+
+  return x_prev;
+
+}
+bool isPalindrome(Node *head)
+{
+    //Your code here
+    if(head==NULL || head->next==NULL) return true;
+    Node *slow=head,*fast=head,*prev_slow=head,*second_half,*head2;
+    Node *middle=NULL;
+    bool res=true;
+    while(fast && fast->next){
+        prev_slow=slow;
+        slow=slow->next;
+        fast=fast->next->next;
+    }
+    if(fast!=NULL){
+        middle=slow;
+        slow=slow->next;
+    }
+    second_half=slow;
+    prev_slow->next=NULL;
+    head2=reverse(second_half);
+    Node *ptr=head2;
+    res=compareList(head,head2);
+    return res;
+}
