@@ -1,0 +1,8 @@
+Time Complexity = O(1)
+Space Complexity = O(1)
+
+unsigned int getFirstSetBit(int n){
+    
+    // Your code here
+    return log2(n&-n)+1;
+}

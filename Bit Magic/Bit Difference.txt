@@ -1,0 +1,23 @@
+Time Complexity = O(1)
+Space Complexity = O(1)
+
+int setBits(int n,int res=0){
+    if(n==0)
+        return res;
+    res++;
+    setBits(n&(n-1),res);
+}
+int countBitsFlip(int a, int b){
+    
+    // Your logic here
+    if(a==b){
+        return 0;
+    }
+    if(a==0){
+        return setBits(b);
+    }
+    if(b==0){
+        return setBits(b);
+    }
+    return setBits(a^b);
+}

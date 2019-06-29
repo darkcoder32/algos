@@ -1,0 +1,11 @@
+Time Complexity = O(1)
+Space Complexity = O(1)
+
+bool isSparse(int n){
+    
+    // Your code
+    if(n>>1 & n){
+        return false;
+    }
+    return true;
+}

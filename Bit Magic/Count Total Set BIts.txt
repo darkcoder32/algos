@@ -1,0 +1,17 @@
+Time Complexity = O(n)
+Space Complexity = O(1)
+
+int setBits(int n,int res=0){
+    if(n==0)
+        return res;
+    res++;
+    setBits(n&(n-1),res);
+}
+int countSetBits(int n,int res=0){
+    
+    // Your logic here
+    if(n==0){
+        return res;
+    }
+    return countSetBits(n-1,res+=setBits(n));
+}

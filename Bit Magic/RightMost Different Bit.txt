@@ -1,0 +1,17 @@
+Time Complexity = O(1)
+Space Complexity = O(1)
+
+unsigned int getFirstSetBit(int n){
+    
+    // Your code here
+    return log2(n&-n)+1;
+}
+int posOfRightMostDiffBit(int m, int n)
+{
+    
+    // Your code here
+    if(m==n){
+        return -1;
+    }
+    return getFirstSetBit(m^n);
+}

@@ -1,0 +1,13 @@
+Time Complexity = O(1)
+Space Complexity = O(1)
+
+unsigned int swapBits(unsigned int n)
+{
+	
+	// Your code here
+	int even_bits=n & 0xAAAAAAAA;
+	even_bits>>=1;
+	int odd_bits=n & 0x55555555;
+	odd_bits<<=1;
+	return (even_bits|odd_bits);
+}

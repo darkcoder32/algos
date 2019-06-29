@@ -1,0 +1,13 @@
+Time Complexity = O(no of largest 1's)
+Space Complexity = O(1)
+
+int maxConsecutiveOnes(int x)
+{
+    // Your code here
+    int c=0;
+    while(x!=0){
+        x=x&(x<<1);
+        c++;
+    }
+    return c;
+}
