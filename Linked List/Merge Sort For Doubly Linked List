@@ -1,0 +1,86 @@
+Node* sortedMerge(Node* head1,   Node* head2)
+{
+    // Your Code Here
+    Node *head3, *tmp;
+    if(head1->data<head2->data){
+        head3=head1;
+        head1=head1->next;
+    }
+    else{
+        head3=head2;
+        head2=head2->next;
+    }
+    tmp=head3;
+    tmp->prev=NULL;
+    while(head1!=NULL && head2!=NULL){
+        if(head1->data<head2->data){
+            tmp->next=head1;
+            head1->prev=tmp;
+            tmp=head1;
+            head1=head1->next;
+        }
+        else{
+            tmp->next=head2;
+            head2->prev=tmp;
+            tmp=head2;
+            head2=head2->next;
+        }
+    }
+    while(head1!=NULL){
+        tmp->next=head1;
+        head1->prev=tmp;
+        tmp=head1;
+        head1=head1->next;
+    }
+    while(head2!=NULL){
+        tmp->next=head2;
+        head2->prev=tmp;
+        tmp=head2;
+        head2=head2->next;
+    }
+    tmp->next=NULL;
+    return head3;
+}
+void partition(Node* head,Node** head1,Node** head2){
+    *head1=head;
+    Node *slow=head,*fast=head;
+    while(fast->next!=NULL){
+        fast=fast->next->next;
+        if(fast==NULL)
+            break;
+        slow=slow->next;
+    }
+    *head2=slow->next;
+    slow->next=NULL;
+}
+Node* mergeSort(Node* head) {
+    // your code here
+    Node* ptr=head;
+    Node *head1=NULL,*head2=NULL;
+    if(ptr==NULL || ptr->next==NULL){
+        return head;
+    }
+    partition(head,&head1,&head2);
+    /*Node* node=head1;
+    while (node != NULL) { 
+        cout << node->data << " "; 
+        node = node->next; 
+    } 
+    cout<<endl;
+    node=head2;
+    while (node != NULL) { 
+        cout << node->data << " "; 
+        node = node->next; 
+    } 
+    cout<<endl;*/
+    head1=mergeSort(head1);
+    head2=mergeSort(head2);
+    head=sortedMerge(head1,head2);
+    return head;
+}
+
+struct Node *sortDoubly(struct Node *head)
+{
+	// Your code here
+	return mergeSort(head);
+}
