@@ -1,0 +1,46 @@
+Time Complexity = O(m+n)
+Space Complexity = O(1)
+
+int intersectPoint(Node* head1, Node* head2)
+{
+    // Your Code Here
+    if(head1 == NULL || head2== NULL) return -1;
+    int l1=1,l2=1;
+    Node *ptr1=head1,*ptr2=head2;
+    while(ptr1){
+        ptr1=ptr1->next;
+        l1++;
+    }
+    while(ptr2){
+        ptr2=ptr2->next;
+        l2++;
+    }
+    Node*bigList=l1>l2?head1:head2;
+    int k=abs(l1-l2);
+    for(int i=1;i<=k;i++){
+        bigList=bigList->next;
+    }
+    if(l1>l2){
+        while(bigList){
+            if(bigList->data==head2->data){
+                return head2->data;
+            }
+            else{
+                bigList=bigList->next;
+                head2=head2->next;
+            }
+        }
+    }
+    else{
+        while(bigList){
+            if(bigList->data==head1->data){
+                return head1->data;
+            }
+            else{
+                bigList=bigList->next;
+                head1=head1->next;
+            }
+        }
+    }
+    return -1;
+}
