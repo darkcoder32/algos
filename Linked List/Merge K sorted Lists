@@ -1,0 +1,48 @@
+Time Complexity = O(k*nlogn)
+ Node* sortedMerge(Node* head1,   Node* head2)
+{
+    // Your Code Here
+    Node *head3, *tmp;
+    if(head1->data<head2->data){
+        head3=head1;
+        head1=head1->next;
+    }
+    else{
+        head3=head2;
+        head2=head2->next;
+    }
+    tmp=head3;
+    while(head1!=NULL && head2!=NULL){
+        if(head1->data<head2->data){
+            tmp->next=head1;
+            tmp=head1;
+            head1=head1->next;
+        }
+        else{
+            tmp->next=head2;
+            tmp=head2;
+            head2=head2->next;
+        }
+    }
+    while(head1!=NULL){
+        tmp->next=head1;
+        tmp=head1;
+        head1=head1->next;
+    }
+    while(head2!=NULL){
+        tmp->next=head2;
+        tmp=head2;
+        head2=head2->next;
+    }
+    tmp->next=NULL;
+    return head3;
+}
+Node * mergeKLists(Node *arr[], int N)
+{
+       // Your code here
+       Node* head=arr[0];
+       for(int i=1;i<N;i++){
+           head=sortedMerge(head,arr[i]);
+       }
+       return head;
+}
