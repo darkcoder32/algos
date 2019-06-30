@@ -1,0 +1,36 @@
+Time Complexity = O(n)
+
+Node* segregate(Node *head) {
+    
+    Node *zeroD=new Node(0);       //wonderful use of these nodes
+    Node *oneD=new Node(0);
+    Node *twoD=new Node(0);
+    Node *zero=zeroD,*one=oneD,*two=twoD;
+    Node *ptr=head;
+    if(ptr==NULL || ptr->next==NULL) return head;
+    while(ptr){
+        if(ptr->data==0){
+            zero->next=ptr;
+            zero=ptr;
+            ptr=ptr->next;
+        }
+        else if(ptr->data==1){
+            one->next=ptr;
+            one=ptr;
+            ptr=ptr->next;
+        }
+        else if(ptr->data==2){
+            two->next=ptr;
+            two=ptr;
+            ptr=ptr->next;
+        }
+    }
+    zero->next=oneD->next?oneD->next:twoD->next;
+    one->next=twoD->next;
+    two->next=NULL;
+    head=zeroD->next;
+    free(zeroD);
+    free(oneD);
+    free(twoD);
+    return head;
+}
