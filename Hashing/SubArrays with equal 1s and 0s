@@ -1,0 +1,66 @@
+Time Complexity = O(n)  using array mapping very Efficient Solution
+
+long long int subArraySum(int arr[], int n)
+{
+    int mp[2*n+1]={0};
+    int sum=0;
+    int count=0;
+    for(int i=0;i<n;i++){
+        if(arr[i]==0){
+            arr[i]=-1;
+        }
+        sum+=arr[i];
+        if(sum==0) count++;
+        if(sum<0){
+            if(mp[abs(sum)+n]>0){
+                count+=mp[abs(sum)+n];
+            }
+            mp[abs(sum)+n]++;
+        }
+        else{
+            if(mp[sum]>0)
+                count+=mp[sum];
+            mp[sum]++;
+        }
+    }
+    return count;
+}
+long long int countSubarrWithEqualZeroAndOne(int arr[], int n)
+{
+    //Your code here
+    return subArraySum(arr,n);
+}
+
+
+
+
+
+
+Time Complexity = O(n) but using unordered map
+/*long long int subArraySum(int arr[], int n)
+{
+    unordered_map<int, int> mp; 
+    long long int c=0;        //cost=1 not=1
+    mp[0]=1;                  //cost=1 not=1
+    for(int i=0;i<n;i++){     //cost=3 not=n+1
+        if(mp[arr[i]]>0){     //cost=2 not=n+1
+            c+=mp[arr[i]];    //for calculating how many subarray can be made with given sum
+        }
+        mp[arr[i]]++;         //cost=2 not=n+1
+    }
+    return c;                 //cost=1 not=1
+}
+long long int countSubarrWithEqualZeroAndOne(int arr[], int n)
+{
+    //Your code here
+    if(arr[0]==0){    //cost=1 no of times(not)=1
+        arr[0]=-1;    //cost=1 not=1
+    }
+    for(int i=1;i<n;i++){   //cost=3 not=n
+        if(arr[i]==0){      //cost=2 not=n
+            arr[i]=-1;
+        }
+        arr[i]+=arr[i-1];   //cost=2 not=n
+    }
+    return subArraySum(arr,n);   //cost=1 not=1
+}*/
