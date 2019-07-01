@@ -1,0 +1,26 @@
+Time Complexity = O(n)
+Space Complexity = O(n)
+
+bool ispar(string str)
+{
+    // Your code here
+    stack<int>s;
+    s.push(str[0]);
+    for(int i=1;i<str.length();i++){
+        if(str[i]=='{' || str[i]=='(' || str[i]=='['){
+            s.push(str[i]);
+        }
+        else{
+            if(s.empty()) return false;
+            int tmp=s.top();
+            if(tmp=='[' && str[i]==']' || tmp=='{' && str[i]=='}' ||tmp=='(' && str[i]==')'){
+                s.pop();
+            }
+            else{
+                return false;
+            }
+        }
+    }
+    if(!s.empty()) return false;
+    return true;
+}
