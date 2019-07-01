@@ -1,0 +1,59 @@
+
+
+O(n) Space Solution
+
+Node *copyList(Node *head) {
+    // Your code here
+    if(head==NULL) return NULL;
+    if(head->next==NULL){
+        Node *node=new Node(head->data);
+        return node;
+    }
+    
+    Node *ptr=head,*prev=NULL,*cloneHead=NULL;
+    vector<Node*>v;
+    /*ptr=head;
+    while(ptr){
+        if(ptr->arb){
+            cout<<ptr->arb->data<<" ";
+        }
+        else{
+            cout<<"NULL"<<" ";
+        }
+        ptr=ptr->next;
+    }*/
+    while(ptr){                               //sets the next pointer of clone to its correct location 
+        v.push_back(ptr->next);
+        Node *node=new Node(ptr->data);
+        if(prev!=NULL) prev->next=node;
+        else{cloneHead=node;}
+        prev=node;
+        node->arb=ptr;
+        Node *tmp=ptr->next;
+        ptr->next=node;
+        ptr=tmp;
+    }
+    ptr=cloneHead;
+    while(ptr){               //sets the arb pointer of clone to its correct location 
+        if(ptr->arb->arb) ptr->arb=ptr->arb->arb->next;
+        else{ptr->arb=NULL;}
+        ptr=ptr->next;
+    }
+    ptr=head;               // Storing the original linked list again
+    int i=0;
+    while(ptr){
+        ptr->next=v[i++];
+        ptr=ptr->next;
+    }
+    /*ptr=cloneHead;
+    while(ptr){
+        if(ptr->arb){
+            cout<<ptr->arb->data<<" ";
+        }
+        else{
+            cout<<"NULL"<<" ";
+        }
+        ptr=ptr->next;
+    }*/
+    return cloneHead;
+}
