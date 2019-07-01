@@ -1,0 +1,46 @@
+Time Complexity = O(n)
+
+Non Recursive Solution
+stack<int> deleteMid(stack<int>s,int sizeOfStack,int current)
+{
+    //Your code here
+    if(sizeOfStack==1){
+        return s;
+    }
+    int mid=sizeOfStack/2;
+    int c=0;
+    stack<int>s1;
+    while(!s.empty()){
+        s1.push(s.top());
+        s.pop();
+        c++;
+        if(c==mid){
+            s.pop();
+            break;
+        }
+    }
+    while(!s1.empty()){
+        s.push(s1.top());
+        s1.pop();
+    }
+    return s;
+}
+
+Recursive Solution
+stack<int> deleteMid(stack<int>s,int sizeOfStack,int c=0)
+{
+    //Your code here
+    if(sizeOfStack==1){
+        return s;
+    }
+    int mid=sizeOfStack/2;
+    if(c==mid){
+        s.pop();
+        return s;
+    }
+    int top=s.top();
+    s.pop();
+    s=deleteMid(s,sizeOfStack,c+1);
+    s.push(top);
+    return s;
+}
