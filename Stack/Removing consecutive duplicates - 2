@@ -1,0 +1,26 @@
+Time Complexity = O(n)
+Space Complexity = O(n)              //maintaing a stack
+
+string removePair(string str){
+    // Your code here
+    stack<int>s;
+    string ans="";
+    for(int i=0;i<str.length();i++){
+        if(s.empty()){
+            s.push(str[i]);
+        }
+        else if(s.top()==str[i]){
+            s.pop();
+        }
+        else{
+            s.push(str[i]);
+        }
+    }
+    char ch;
+    while(!s.empty()){
+        ch=s.top();
+        ans=ch+ans;
+        s.pop();
+    }
+    return ans;
+}
