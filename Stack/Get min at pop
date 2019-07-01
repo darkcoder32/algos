@@ -1,0 +1,29 @@
+Time Complexity = O(n)
+Space Complexity =O(n)
+
+stack<int>_push(int arr[],int n)
+{
+   // your code here
+   stack<int>s;
+   s.push(arr[0]);
+   for(int i=1;i<n;i++){
+       if(arr[i]>s.top()){
+           s.push(s.top());
+       }
+       else{
+           s.push(arr[i]);
+       }
+   }
+   return s;
+}
+/* print minimum element of the stack each time
+   after popping
+*/
+void _getMinAtPop(stack<int>s)
+{
+    // your code here
+    while(!s.empty()){
+        cout<<s.top()<<" ";
+        s.pop();
+    }
+}
