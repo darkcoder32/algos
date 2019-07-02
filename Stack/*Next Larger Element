@@ -1,0 +1,24 @@
+Time Complexity = O(n)
+
+#define ll long long 
+void nextLargerElement(long long arr[], int n){
+    // Your code here
+    stack<ll>s;
+    s.push(arr[0]);
+    unordered_map<ll,ll>mp;
+    for(int i=1;i<n;i++){
+        while(!s.empty() && arr[i]>=s.top()){
+            ll x=s.top();
+            s.pop();
+            mp[x]=arr[i];
+        }
+        s.push(arr[i]);
+    }
+    while(!s.empty()){
+        mp[s.top()]=-1;
+        s.pop();
+    }
+    for(int i=0;i<n;i++){
+        cout<<mp[arr[i]]<<" ";
+    }
+}
