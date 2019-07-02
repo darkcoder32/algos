@@ -1,0 +1,17 @@
+Time Complexity = O(n)     // 2n operations
+                           // all elements are exactly pushed once and poped once 
+
+void calculateSpan(int price[], int n, int span[])
+{
+   // Your code here
+   span[0]=1;
+   stack<int>s;
+   s.push(0);
+   for(int i=1;i<n;i++){
+       while(!s.empty() && price[s.top()]<=price[i]){
+           s.pop();
+       }
+       span[i]=s.empty()?i+1:i-s.top();
+       s.push(i);
+   }
+}
