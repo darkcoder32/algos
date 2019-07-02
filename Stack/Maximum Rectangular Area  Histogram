@@ -1,0 +1,34 @@
+Time Complexity = O(n)
+
+#define ll long long int
+long getMaxArea(long long arr[], int n){
+    
+    // Your code here
+    long max=0;
+    int i=0;
+    stack<int>s;
+    while(i<n){
+        if(s.empty() || arr[i]>=arr[s.top()]){
+            s.push(i);
+            i++;
+        }
+        else{
+            int curr_max=s.top();
+            s.pop();
+            ll area=arr[curr_max]*(s.empty()?(i):(i-1-s.top()));
+            if(max<area){
+                max=area;
+            }
+        }
+    }
+    while(!s.empty()){
+            int curr_max=s.top();
+            s.pop();
+            ll area=arr[curr_max]*(s.empty()?(i):(i-1-s.top()));
+            if(max<area){
+                max=area;
+            }
+    }
+    return max;
+    
+}
