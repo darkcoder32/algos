@@ -1,0 +1,44 @@
+Time Complexity = O(n)
+
+int priority(char ch){
+    if(ch=='^') return 3;
+    else if(ch == '*' || ch == '/') return 2;
+    else if(ch=='+' || ch == '-') return 1;
+    else return 0;
+}
+string infixToPostfix(string str)
+{
+    // Your code here
+    stack<int>s;
+    s.push('N');
+    string post="";
+    for(int i=0;i<str.length();i++){
+        if(str[i]>='a' && str[i]<='z' || str[i]>='A' && str[i]<='Z'){
+            post+=str[i];
+        }
+        else if(str[i]=='('){
+            s.push('(');
+        }
+        else if(str[i]==')'){
+            while(s.top()!='N' && s.top()!='('){
+                post+=s.top();
+                s.pop();
+            }
+            if(s.top()=='('){
+                s.pop();
+            }
+        }
+        else{
+            while(s.top()!='N' && priority(str[i])<=priority(s.top())){
+                post+=s.top();
+                s.pop();
+            }
+            s.push(str[i]);
+        }
+    }
+    while(s.top()!='N'){
+        post+=s.top();
+        s.pop();
+    }
+    return post;
+}
