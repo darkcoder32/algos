@@ -1,0 +1,50 @@
+Time Complexity = O(n)
+
+int csize;
+map<int,int>mp;
+deque<int>que;
+LRUCache::LRUCache(int N)
+{
+     //Your code here
+     mp.clear();
+     que.clear();
+     csize=N;
+}
+/*Sets the key x with value y in the LRU cache */
+void LRUCache::set(int key, int value) 
+{
+     //Your code here
+     //if key already exist
+     if(mp.find(key)==mp.end()){
+        if(que.size()==csize){
+            int k=que.back();
+            que.pop_back();
+            mp.erase(k);
+        }
+     }
+     else{
+         deque<int>::iterator itr=que.begin();
+         while(*itr!=key) itr++;
+         que.erase(itr);
+         mp.erase(key);
+     }
+     que.push_front(key);
+     mp[key]=value;
+}
+/*Returns the value of the key x if 
+present else returns -1 */
+int LRUCache::get(int key)
+{
+    //Your code here
+    auto item=mp.find(key);
+    if(item==mp.end()){
+        return -1;
+    }
+    else{
+        deque<int>::iterator itr=que.begin();
+        while(*itr!=key) itr++;
+        que.erase(itr);
+        que.push_front(key);
+        return mp[key];
+    }
+}
