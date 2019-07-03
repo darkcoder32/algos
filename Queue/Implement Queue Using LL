@@ -1,0 +1,27 @@
+Time Complexity = O(1) for both operations
+
+void MyQueue:: push(int x)
+{
+        // Your Code
+        QueueNode* node=new QueueNode(x);
+        if(rear==NULL){
+            rear=node;
+            front=node;
+            return;
+        }
+        rear->next=node;
+        rear=node;
+}
+/*The method pop which return the element
+  poped out of the queue*/
+int MyQueue :: pop()
+{
+        // Your Code
+        if(front==NULL) return -1;
+        int ans=front->data;
+        QueueNode* tmp=front;
+        front=front->next;
+        if(front==NULL) rear=NULL;
+        free(tmp);
+        return ans;
+}
