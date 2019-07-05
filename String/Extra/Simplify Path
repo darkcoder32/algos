@@ -1,0 +1,19 @@
+Time Complexity = O(n)
+
+string simplifyPath(string path) {
+        stringstream ss(path);
+        stack<string>s;
+        string str;
+        while(getline(ss,str,'/')){
+            if(str=="" || str==".") continue;
+            if(!s.empty() && str=="..") s.pop();
+            else if(str!="..") s.push(str);
+        }
+        string ans="";
+        while(!s.empty()){
+            ans="/"+s.top()+ans;
+            s.pop();
+        }
+        if(ans=="") return "/";
+        return ans;
+    }
