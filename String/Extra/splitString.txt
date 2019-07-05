@@ -1,0 +1,19 @@
+vector<string> split(string path){
+        int i=0;
+        string tmp="";
+        vector<string>arr;
+        while(i<path.length()){
+            if(path[i]=='/'){
+                if(tmp!=""){
+                    arr.push_back(tmp);
+                }
+                tmp="";
+            }
+            else
+            {
+                tmp+=path[i];    
+            }
+            i++;
+        }
+        return arr;
+   }
