@@ -1,3 +1,33 @@
+Time Complexity = O(n)
+Space Complexity = O(1)
+
+int missingNumber(int arr[], int n) { 
+    
+    // Your code here
+    int last=-1;
+    for(int i=0;i<n;i++){
+        if(arr[i]<=0 || arr[i]>n){
+            arr[i]=n;
+        }
+        else if(arr[i]==n){
+            last=n;
+        }
+    }
+    int mod=n+1;
+    for(int i=0;i<n;i++){
+        arr[arr[i]%mod]+=mod;
+    }
+    int i=0;
+    for(i=1;i<n;i++){
+        if(arr[i]/mod==0)
+            return i;
+    }
+    if(last==n) return n+1;
+    else return n;
+} 
+
+
+
 Time Complexity = O(nlogn) //due to sorting
 Space Complexity = O(n)
 
