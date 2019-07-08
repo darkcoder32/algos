@@ -1,0 +1,53 @@
+struct myStack
+{
+    stack<int>s;
+    int max;
+    void push(int x){
+        if(s.empty()){
+            max=x;
+            s.push(x);
+            return;
+        }
+        if(x>max){
+            s.push(2*x-max);
+            max=x;
+        }
+        else s.push(x);
+    }
+    int top(){
+        if(s.empty()) return -1;
+        return s.top();
+    }
+    int pop(){
+        if(s.empty()){
+            return -1;
+        }
+        int tmp;
+        if(s.top()>max){
+            tmp=max;
+            max=2*max-s.top();
+            s.pop();
+            return tmp;
+        }
+        else{
+            tmp=s.top();
+            s.pop();
+            return tmp;
+        }
+    }
+    int peek(){
+        if(s.empty()){
+            return -1;
+        }
+        if(s.top()>max){
+            return max;
+        }
+        else return s.top();
+    }
+    int getMax(){
+        if(s.empty()){
+            return -1;
+        }
+        return max;
+    }
+};
