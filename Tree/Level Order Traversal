@@ -1,0 +1,17 @@
+Time Complexity = O(n)
+Space Complexity = O(w)  ///w is the maximum width
+
+void levelOrder(Node* node)
+{
+  //Your code here
+  if(node==NULL) return;
+  queue<Node*>q;
+  q.push(node);
+  while(!q.empty()){
+      Node* x=q.front();
+      cout<<x->data<<" ";
+      q.pop();
+      if(x->left!=NULL)  q.push(x->left);
+      if(x->right!=NULL) q.push(x->right);
+  }
+}
