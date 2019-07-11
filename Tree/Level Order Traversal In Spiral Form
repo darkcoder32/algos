@@ -5,6 +5,34 @@ void printSpiral(Node *root)
 {
     //Your code here
     if(root==NULL) return;
+    stack<Node*>s1,s2;
+    s1.push(root);
+    while(!s1.empty() || !s2.empty()){
+        while(!s1.empty()){
+            Node* x=s1.top();
+            s1.pop();
+            cout<<x->data<<" ";
+            if(x->right) s2.push(x->right);
+            if(x->left) s2.push(x->left);
+        }
+        while(!s2.empty()){
+            Node* x=s2.top();
+            s2.pop();
+            cout<<x->data<<" ";
+            if(x->left) s1.push(x->left);
+            if(x->right) s1.push(x->right);
+        }
+    }
+}
+
+
+Time Complexity = O(n*n)
+Space Complexity = O(n)
+
+void printSpiral(Node *root)
+{
+    //Your code here
+    if(root==NULL) return;
     int order=1;
     queue<Node*>q;
     q.push(root);
