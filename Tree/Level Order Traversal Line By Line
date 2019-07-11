@@ -1,0 +1,48 @@
+Time Complexity = O(n)
+Space Complexity = O(w)
+
+void levelOrder(Node* node)
+{
+  //Your code here
+  if(node==NULL) return;
+  queue<Node*>q;
+  q.push(node);
+  while(!q.empty()){
+      int size=q.size();
+      while(size){
+          Node* x=q.front();
+          q.pop();
+          cout<<x->data<<" ";
+          if(x->left!=NULL) q.push(x->left);
+          if(x->right!=NULL) q.push(x->right);
+          size--;
+      }
+      cout<<"$"<<" ";
+  }
+}
+
+
+Time Complexity = O(n)
+Space Complexity = O(w+h)
+
+void levelOrder(Node* node)
+{
+  //Your code here
+  if(node==NULL) return;
+  queue<Node*>q;
+  q.push(node);
+  q.push(NULL);
+  while(!q.empty()){
+      if(q.front()==NULL) break;
+      Node* x=q.front();
+      cout<<x->data<<" ";
+      q.pop();
+      if(x->left!=NULL)  q.push(x->left);
+      if(x->right!=NULL) q.push(x->right);
+      if(q.front()==NULL){
+          q.pop();
+          cout<<"$"<<" ";
+          q.push(NULL);
+      }
+  }
+}
