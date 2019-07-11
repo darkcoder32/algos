@@ -1,0 +1,23 @@
+Time Complexity = O(n)
+Extra Space = O(1)
+
+int getMaxWidth(Node* node)
+{
+   // Your code here
+  if(node==NULL) return 0;
+  int width=0;
+  queue<Node*>q;
+  q.push(node);
+  while(!q.empty()){
+      int size=q.size();
+      width=max(width,size);
+      while(size){
+          Node* x=q.front();
+          q.pop();
+          if(x->left!=NULL) q.push(x->left);
+          if(x->right!=NULL) q.push(x->right);
+          size--;
+      }
+  }
+  return width;
+}
