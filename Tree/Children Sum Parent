@@ -1,0 +1,17 @@
+Time Complexity = O(n)
+
+int isSumProperty(Node *node)
+{
+ // Add your code here
+    if(node == NULL) return true;
+    if(node->left!=NULL && node->right!=NULL){
+        if(node->right->data+node->left->data!=node->data) return false;
+    }
+    if(node->left!=NULL && node->right==NULL){
+        if(node->left->data!=node->data) return false;
+    }
+    if(node->right!=NULL && node->left==NULL){
+        if(node->right->data!=node->data) return false;
+    }
+    return isSumProperty(node->left) && isSumProperty(node->right);
+}
