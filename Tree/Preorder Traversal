@@ -1,3 +1,5 @@
+Time Complexity = O(n)
+
 void preorder(Node* root)
 {
     if(root==NULL) return;
