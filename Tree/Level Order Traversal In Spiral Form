@@ -1,0 +1,40 @@
+Time Complexity = O(n)
+Space Complexity = O(n)
+
+void printSpiral(Node *root)
+{
+    //Your code here
+    if(root==NULL) return;
+    int order=1;
+    queue<Node*>q;
+    q.push(root);
+    stack<Node*>s;
+    s.push(root);
+    while(!q.empty()){
+        int size=q.size();
+        while(size--){
+            Node *x=q.front();
+            q.pop();
+            if(order%2==0){
+                cout<<x->data<<" ";
+            }
+            if(x->left!=NULL){
+                q.push(x->left);
+                if(order%2==0)
+                    s.push(x->left);
+            }
+            if(x->right!=NULL){
+                q.push(x->right);
+                if(order%2==0)
+                    s.push(x->right);
+            }
+        }
+        if(order&1){
+            while(!s.empty()){
+                cout<<s.top()->data<<" ";
+                s.pop();
+            }
+        }
+        order++;
+    }
+}
