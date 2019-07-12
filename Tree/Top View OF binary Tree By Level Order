@@ -1,0 +1,34 @@
+I/P: 
+             10
+
+         /        \
+
+     20            30
+
+   /      \       /
+
+40          60 90
+
+O/P:
+10 20 30 40
+
+
+Time Complexity = O(nlogn)
+
+void topView(Node *root)
+{
+    // Your code here
+    map<int,int>mp;
+    queue<pair<Node*,int> >q;
+    q.push(make_pair(root,0));
+    while(!q.empty()){
+        pair<Node* ,int>x=q.front();
+        q.pop();
+        if(mp.find(x.second)==mp.end()){
+            cout<<x.first->data<<" ";
+            mp[x.second]=x.first->data;
+        }
+        if(x.first->left) q.push(make_pair(x.first->left,x.second-1));
+        if(x.first->right) q.push(make_pair(x.first->right,x.second+1));
+    }
+}
