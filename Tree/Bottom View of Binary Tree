@@ -1,0 +1,19 @@
+Time Complexity = O(nlogn)
+
+void getVerticalTraversal(Node* root,int hd,map<int,vector<int> >&mp){
+    if(root==NULL) return;
+    mp[hd].push_back(root->data);
+    getVerticalTraversal(root->left,hd-1,mp);
+    getVerticalTraversal(root->right,hd+1,mp);
+}
+void bottomView(Node *root)
+{
+    // Your code here
+    map<int,vector<int> >mp;
+    int hd=0;
+    getVerticalTraversal(root,hd,mp);
+    map<int,vector<int> >::iterator i;
+    for(i=mp.begin();i!=mp.end();i++){
+        cout<<i->second[i->second.size()-1]<<" ";
+    }
+}
