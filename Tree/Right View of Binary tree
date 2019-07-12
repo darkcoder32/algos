@@ -1,0 +1,17 @@
+Time Complexity = O(n)
+
+void rightViewUtil(Node* root,int level,int &maxlevel){
+    if(root==NULL) return;
+    if(level>maxlevel){
+        cout<<root->data<<" ";
+        maxlevel=level;
+    }
+    rightViewUtil(root->right,level+1,maxlevel);
+    rightViewUtil(root->left,level+1,maxlevel);
+}
+void rightView(Node *root)
+{
+   // Your code here
+   int maxlevel=0;
+   rightViewUtil(root,1,maxlevel);
+}
