@@ -1,0 +1,51 @@
+Time Complexity = O(n)
+
+Node* tree(int in[],int post[],int start,int end,int &preIndex,unordered_map<int,int> &mp){
+    if(start>end) return NULL;
+    int inIndex=mp[post[preIndex--]];
+    Node* root=new Node(in[inIndex]);
+    root->right=tree(in,post,inIndex+1,end,preIndex,mp);
+    root->left=tree(in,post,start,inIndex-1,preIndex,mp);
+    return root;
+}
+Node *buildTree(int in[], int post[], int n)
+{
+    // Your code here
+    int preIndex=n-1;
+    unordered_map<int,int>mp;
+    for(int i=0;i<n;i++){
+        mp[in[i]]=i;
+    }
+    return tree(in,post,0,n-1,preIndex,mp);
+}
+
+
+
+
+
+
+
+
+
+Time Complexity = O(n^2) in Worst case when tree is skewed // we can optimise this by searching by hashmap
+
+int search(int in[],int st,int en,int x){
+    for(int i=st;i<=en;i++){
+        if(in[i]==x) return i;
+    }
+    return -1;
+}
+Node* tree(int in[],int post[],int start,int end,int &preIndex){
+    if(start>end) return NULL;
+    int inIndex=search(in,start,end,post[preIndex--]);
+    Node* root=new Node(in[inIndex]);
+    root->right=tree(in,post,inIndex+1,end,preIndex);
+    root->left=tree(in,post,start,inIndex-1,preIndex);
+    return root;
+}
+Node *buildTree(int in[], int post[], int n)
+{
+    // Your code here
+    int preIndex=n-1;
+    return tree(in,post,0,n-1,preIndex);
+}
