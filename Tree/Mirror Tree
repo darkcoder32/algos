@@ -1,0 +1,16 @@
+Time Complextiy = O(n)
+
+void mirror(Node* root) 
+{
+     // Your Code Here
+     queue<Node*>q;
+     q.push(root);
+     while(!q.empty()){
+         Node* x=q.front();q.pop();
+         if(x->left) q.push(x->left);
+         if(x->right) q.push(x->right);
+         Node* tmp=x->left;
+         x->left=x->right;
+         x->right=tmp;
+     }
+}
