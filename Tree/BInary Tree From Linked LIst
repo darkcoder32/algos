@@ -8,7 +8,7 @@ void convert(Node *head, TreeNode *&root) {
     root=new TreeNode(head->data);
     q.push(root);
     head=head->next;
-    while(!q.empty()){
+    while(head){
         TreeNode* x=q.front();q.pop();
         if(head){
             x->left=new TreeNode(head->data);
