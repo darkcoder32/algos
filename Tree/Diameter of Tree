@@ -1,0 +1,15 @@
+Time Complexity = O(n)
+
+int height(Node* root,int &maxW){
+    if(root==NULL) return 0;
+    int lh=height(root->left,maxW);
+    int rh=height(root->right,maxW);
+    maxW=max(maxW,lh+1+rh);
+    return 1+max(lh,rh);
+}
+int diameter(Node* root)
+{
+   int maxW=0;
+   height(root,maxW);
+   return maxW;
+}
