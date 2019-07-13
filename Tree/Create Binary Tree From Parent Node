@@ -1,0 +1,23 @@
+Time Complexity = O(n)    //2n operations
+
+Node *createTree(int parent[], int n)
+{
+    // Your code here
+    vector<Node*>mp;
+    Node* root=NULL;
+    for(int i=0;i<n+1;i++){
+        Node*tmp=new Node(i);
+        mp.push_back(tmp);
+    }
+    for(int i=0;i<n;i++){
+        if(parent[i]==-1){
+            root=mp[i];
+        }
+        else{
+            Node *ptr=mp[parent[i]];
+            if(ptr->left==NULL) ptr->left=mp[i];
+            else if(ptr->right==NULL) ptr->right=mp[i];
+        }
+    }
+    return root;
+}
