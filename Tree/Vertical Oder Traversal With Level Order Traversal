@@ -1,0 +1,28 @@
+Time Complexity = O(nlogn);
+Space Complexity = O(n)
+
+void verticalOrder(Node *root)
+{
+    //Your code here
+    map<int,vector<Node*> >mp;
+    queue<pair<Node*,int> >q;
+    q.push(make_pair(root,0));
+    while(!q.empty()){
+        pair<Node*,int> x=q.front();
+        int hd=x.second;
+        q.pop();
+        mp[hd].push_back(x.first);
+        if(x.first->left){
+            q.push(make_pair(x.first->left,hd-1));
+        }
+        if(x.first->right){
+            q.push(make_pair(x.first->right,hd+1));
+        }
+    }
+    map<int,vector<Node*> >::iterator it;
+    for(it=mp.begin();it!=mp.end();it++){
+        for(int j=0;j<it->second.size();j++){
+            cout<<it->second[j]->data<<" ";
+        }
+    }
+}
