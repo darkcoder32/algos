@@ -1,0 +1,54 @@
+Time Complexity = O(n);
+Extra Space = O(1)
+
+bool isIdentical(Node *r1, Node *r2)
+{
+    //Your Code here
+    if(r1==NULL && r2==NULL)  return true;
+    else if(r1==NULL || r2==NULL) return false;
+    return (r1->data==r2->data && isIdentical(r1->left,r2->left) &&isIdentical(r1->right,r2->right));
+}
+bool isSubtree(Node* t, Node* s) {
+    // Your code here
+    // return 1 if T2 is subtree of T1 else 0
+    if(s==NULL) return true;
+    if(t==NULL) return false;
+    if(isIdentical(t,s)) return true;
+    return (isIdentical(t->left,s) || isIdentical(t->right,s));
+}
+
+
+
+
+
+Time Complexity = o(n)
+Space Complexity  = O(no of duplicates in tree)
+
+Vector Method
+
+bool isIdentical(Node *r1, Node *r2)
+{
+    //Your Code here
+    if(r1==NULL && r2==NULL)  return true;
+    else if(r1==NULL || r2==NULL) return false;
+    return (r1->data==r2->data && isIdentical(r1->left,r2->left) &&isIdentical(r1->right,r2->right));
+}
+void subtreeNode(Node* root,int x,vector<Node*> &node){
+    if(root==NULL) return ;
+    if(root->data==x){
+        node.push(root);
+    }
+    subtreeNode(root->left,x,node);
+    subtreeNode(root->right,x,node);
+}
+bool isSubtree(Node* s, Node* t) {
+    // Your code here
+    // return 1 if T2 is subtree of T1 else 0
+    int x=s->data;
+    vector<Node*>node;
+    subtreeNode(t,x,node);
+    for(int i=0;i<node.size();i++){
+        if(isIdentical(node[i],s)) return true;
+    }
+    return false;
+}
