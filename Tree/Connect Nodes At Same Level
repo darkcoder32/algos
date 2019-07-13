@@ -1,0 +1,22 @@
+Time Complexity = O(n)
+
+void connect(Node* node)
+{
+  //Your code here
+  if(node==NULL) return;
+  queue<Node*>q;
+  q.push(node);
+  q.push(NULL);
+  while(!q.empty()){
+      if(q.front()==NULL) break;
+      Node* x=q.front();
+      q.pop();
+      x->nextRight=q.front();
+      if(x->left!=NULL)  q.push(x->left);
+      if(x->right!=NULL) q.push(x->right);
+      if(q.front()==NULL){
+          q.pop();
+          q.push(NULL);
+      }
+  }
+}
