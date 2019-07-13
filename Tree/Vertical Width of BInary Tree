@@ -1,0 +1,19 @@
+Time Complexity = O(n)
+Space Complexity = O(h) for recursive calls
+
+void getVerticalTraversal(Node* root,int hd,int &maximum ,int &minimum){
+    if(root==NULL) return;
+    if(hd<minimum) minimum=hd;
+    if(hd>maximum) maximum=hd;
+    getVerticalTraversal(root->left,hd-1,maximum,minimum);
+    getVerticalTraversal(root->right,hd+1,maximum,minimum);
+}
+int verticalWidth(Node *root)
+{
+    // Your code here
+    unordered_map<int,int>mp;
+    int hd=0;
+    int maximum=INT_MIN,minimum=INT_MAX;
+    getVerticalTraversal(root,hd,maximum,minimum);
+    return abs(minimum)+maximum+1;
+}
