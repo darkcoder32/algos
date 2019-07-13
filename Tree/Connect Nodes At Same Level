@@ -1,5 +1,40 @@
 Time Complexity = O(n)
 
+void levelOrder(Node* node)
+{
+  //Your code here
+  if(node==NULL) return;
+  queue<Node*>q;
+  q.push(node);
+  while(!q.empty()){
+      int size=q.size();
+      while(size){
+          Node* x=q.front();
+          q.pop();
+          if(x->left!=NULL) q.push(x->left);
+          if(x->right!=NULL) q.push(x->right);
+          size--;
+          if(size) x->nextRight=q.front();
+      }
+  }
+}
+
+void connect(Node* node)
+{
+  //Your code here
+  levelOrder(node);
+}
+
+
+
+
+
+
+
+
+
+Time Complexity = O(n+h)
+
 void connect(Node* node)
 {
   //Your code here
