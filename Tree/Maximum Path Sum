@@ -1,0 +1,19 @@
+Time Complexity = O(n)
+
+int pathSum(Node* root,int &sum)
+{
+    if(root==NULL) return 0;
+    int lSum=pathSum(root->left,sum);
+    int rSum=pathSum(root->right,sum);
+    int subpath=max(root->data,root->data+max(lSum,rSum));
+    int subTree=max(subpath,lSum+rSum+root->data);
+    sum=max(subTree,sum);
+    return subpath;
+}
+int findMaxSum(Node* root)
+{
+    // Your code goes here
+    int sum=INT_MIN;
+    pathSum(root,sum);
+    return sum;
+}
