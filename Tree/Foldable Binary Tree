@@ -1,0 +1,12 @@
+Time Complexity = O(n)
+
+bool isFoldableUtil(node* n1,node* n2){
+    if(n1==NULL && n2==NULL) return true;
+    if(n1==NULL || n2==NULL) return false;
+    return isFoldableUtil(n1->left,n2->right) && isFoldableUtil(n1->right,n2->left);
+}
+bool isFoldable(struct node *root)
+{
+    if(root==NULL) return true;
+    return isFoldableUtil(root->left,root->right);  
+}
