@@ -1,0 +1,17 @@
+Time Complexity = O(n)
+
+int count(Node* root,int &c,int x){
+    if(root==NULL) return 0;
+    int lsum=count(root->left,c,x);
+    int rsum=count(root->right,c,x);
+    if(lsum+rsum+root->data==x) c++;
+    return lsum+rsum+root->data;
+}
+int countSubtreesWithSumX(Node* root, int x)
+{
+	if (!root)return 0;
+	// Code here
+	int c=0;
+	count(root,c,x);
+	return c;
+}
