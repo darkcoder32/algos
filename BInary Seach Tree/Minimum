@@ -1,0 +1,9 @@
+Time Complexity = O(h)
+
+int minValue(Node* root)
+{
+    // Code here
+    if(root==NULL) return INT_MAX;
+    if(root->left==NULL) return root->data;
+    else return minValue(root->left);
+}
