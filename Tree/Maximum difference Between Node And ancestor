@@ -1,0 +1,16 @@
+Time Complexity = O(n)
+
+int maxDiffUtil(Node* root,int &sum){
+    if(root==NULL) return INT_MAX;
+    if(root->left==NULL && root->right==NULL) return root->data;
+    int val=min(maxDiffUtil(root->left,sum),maxDiffUtil(root->right,sum));
+    sum=max(sum,root->data-val);
+    return min(val,root->data);
+}
+int maxDiff(Node* root)
+{
+    // Your code here 
+    int sum=INT_MIN;
+    maxDiffUtil(root,sum);
+    return sum;
+}
