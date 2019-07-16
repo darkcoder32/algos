@@ -1,6 +1,5 @@
 Time Complexity = O(n)
 
-
 void inOrder(Node* root,char arr[],int &n){
     if(root==NULL){
         arr[n++]='$';
@@ -37,6 +36,12 @@ bool isSubtree(Node* t, Node* s) {
     if(strstr(inOrderT,inOrderS)==NULL) return false;
     return true;
 }
+
+
+
+
+
+
 
 
 Time Complexity = O(nm);
