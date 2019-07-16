@@ -1,3 +1,44 @@
+Time Complexity = O(n)
+
+
+void inOrder(Node* root,char arr[],int &n){
+    if(root==NULL){
+        arr[n++]='$';
+        return;
+    }
+    inOrder(root->left,arr,n);
+    arr[n++]=root->data;
+    inOrder(root->right,arr,n);
+}
+void preOrder(Node* root,char arr[],int &m){
+    if(root==NULL){
+        arr[m++]='$';
+        return;
+    }
+    arr[m++]=root->data;
+    preOrder(root->left,arr,m);
+    preOrder(root->right,arr,m);
+}
+bool isSubtree(Node* t, Node* s) {
+    if(s==NULL) return true;
+    if(t==NULL) return false;
+    char preOrderT[100],inOrderT[100],preOrderS[100],inOrderS[100];
+    int n=0,m=0;
+    preOrder(t,preOrderT,m);
+    inOrder(t,inOrderT,n);
+    preOrderT[m]='\0';
+    inOrderT[n]='\0';
+    n=0,m=0;
+    preOrder(s,preOrderS,m);
+    inOrder(s,inOrderS,n);
+    preOrderS[m]='\0';
+    inOrderS[n]='\0';
+    if(strstr(preOrderT,preOrderS)==NULL) return false;
+    if(strstr(inOrderT,inOrderS)==NULL) return false;
+    return true;
+}
+
+
 Time Complexity = O(nm);
 Extra Space = O(1)
 
