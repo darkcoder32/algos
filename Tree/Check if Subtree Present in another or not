@@ -1,4 +1,4 @@
-Time Complexity = O(n);
+Time Complexity = O(nm);
 Extra Space = O(1)
 
 bool isIdentical(Node *r1, Node *r2)
@@ -14,7 +14,7 @@ bool isSubtree(Node* t, Node* s) {
     if(s==NULL) return true;
     if(t==NULL) return false;
     if(isIdentical(t,s)) return true;
-    return (isIdentical(t->left,s) || isIdentical(t->right,s));
+    return (isSubtree(t->left,s) || isSubtree(t->right,s));
 }
 
 
