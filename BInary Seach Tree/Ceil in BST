@@ -1,0 +1,18 @@
+Time Complexity = O(h)
+
+int findCeil(Node* root, int key) 
+{ 
+    // Base case 
+    if (root == NULL) 
+        return INT_MIN; 
+  
+    // Your code here
+    if(root->data==key) return root->data;
+	else if(root->data>key){
+	    int ceilValue=findCeil(root->left,key);
+	    return ceilValue>=key?ceilValue:root->data;
+	}
+	else{
+	    return findCeil(root->right,key);
+	}   
+} 
