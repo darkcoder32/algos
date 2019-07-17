@@ -1,0 +1,19 @@
+Time Complexity = O(n)
+
+void findPairUtil(Node* root,int sum,unordered_set<int> &s,bool &ans){
+    if(root==NULL) return;
+    findPairUtil(root->left,sum,s,ans);
+    if(s.find(root->data)!=s.end()){
+        ans=true;
+        return;
+    }
+    else s.insert(sum-root->data);
+    findPairUtil(root->right,sum,s,ans);
+}
+bool findPair(Node* root, int sum) {
+    // Your code here
+    unordered_set<int>s;
+    bool ans=false;
+    findPairUtil(root,sum,s,ans);
+    return ans;
+}
