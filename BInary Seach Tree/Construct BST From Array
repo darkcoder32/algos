@@ -1,0 +1,24 @@
+Time Complexity = O(n)
+
+Node* insert(Node* node, int data)
+{
+    // Your code here
+    if(node==NULL) return new Node(data);
+    if(node->data>data){
+        node->left=insert(node->left,data);
+    }
+    if(node->data<data){
+        node->right=insert(node->right,data);
+    }
+    return node;
+}
+Node* constructBst(int arr[], int n)
+{
+    
+    // Code here
+    Node* root=NULL;
+	for(int i=0;i<n;i++){
+	    root=insert(root,arr[i]);
+	}
+	return root;
+}
