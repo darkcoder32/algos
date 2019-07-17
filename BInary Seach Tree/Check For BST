@@ -1,0 +1,33 @@
+Time Complexity = O(n)
+
+int isBSTUtil(Node* root,int min,int max){
+    if(root==NULL) return true;
+    if(root->data>max || root->data<min) return false;
+    return isBSTUtil(root->left,min,root->data-1) && isBSTUtil(root->right,root->data+1,max);  //not allowing duplicates
+}
+bool isBST(Node* root) {
+    // Your code here
+    return isBSTUtil(root,INT_MIN,INT_MAX);
+}
+
+
+
+
+
+
+
+
+
+Time Complexity = O(n) pointers approach
+
+bool isBSTUtil(Node* root,int *minV,int *maxV){
+    if(root==NULL) return true;
+    if(root->data>*maxV || root->data<*minV) return false;
+    int leftmin=*minV,leftmax=root->data,rightmin=root->data,rightmax=*maxV;
+    return isBSTUtil(root->left,&leftmin,&leftmax) && isBSTUtil(root->right,&rightmin,&rightmax);
+}
+bool isBST(Node* root) {
+    // Your code here
+    int minV=INT_MIN,maxV=INT_MAX;
+    return isBSTUtil(root,&minV,&maxV);
+}
