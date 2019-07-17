@@ -1,0 +1,67 @@
+TIme Complexity = O(h)
+
+void maxDiffUtil(Node* root,int k,int &min_diff){
+    if(root==NULL) return;
+    if(root->data==k){
+        min_diff=0;
+        return;
+    }
+    if(min_diff>abs(root->data-k)){
+        min_diff=abs(root->data-k);
+    }
+    if(root->data>k){
+        maxDiffUtil(root->left,k,min_diff);
+    }
+    else maxDiffUtil(root->right,k,min_diff);
+}
+int maxDiff(Node *root, int k)
+{
+    //Your code here
+    int min_diff=INT_MAX;
+    maxDiffUtil(root,k,min_diff);
+    return min_diff;
+}
+
+
+
+
+
+
+
+
+
+Time Complexity = O(h)  //2 traversals using floor and ceil
+
+int floor(Node* root, int key) 
+{ 
+	if(!root) return INT_MAX;
+	if(root->data==key) return root->data;
+	else if(root->data>key){
+	    return floor(root->left,key);
+	}
+	else{
+	    int floorValue=floor(root->right,key);
+	    return floorValue<=key?floorValue:root->data;
+	}
+}
+int findCeil(Node* root, int key) 
+{ 
+    // Base case 
+    if (root == NULL) 
+        return INT_MIN; 
+  
+    // Your code here
+    if(root->data==key) return root->data;
+	else if(root->data>key){
+	    int ceilValue=findCeil(root->left,key);
+	    return ceilValue>=key?ceilValue:root->data;
+	}
+	else{
+	    return findCeil(root->right,key);
+	}   
+} 
+int maxDiff(Node *root, int k)
+{
+    //Your code here
+    return min(abs(k-floor(root,k)),abs(k-findCeil(root,k)));
+}
