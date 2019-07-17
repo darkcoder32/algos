@@ -1,3 +1,26 @@
+Time Complexity = O(h)
+
+int floor(Node* root, int key) 
+{ 
+	if(!root) return INT_MAX;
+	if(root->data==key) return root->data;
+	else if(root->data>key){
+	    return floor(root->left,key);
+	}
+	else{
+	    int floorValue=floor(root->right,key);
+	    return floorValue<=key?floorValue:root->data;
+	}
+}
+
+
+
+
+
+
+
+
+
 Time Complexity  = O(n)
 
 void inOrder(Node* root,int &ans,int x)
