@@ -1,0 +1,7 @@
+pass root->right in inOrderSucc 
+then we get the inOrderSuccessor of root
+
+Node* inOrderSucc(Node* root){
+    while(root->left!=NULL) root=root->left;
+    return root;
+}
