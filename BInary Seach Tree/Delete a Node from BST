@@ -1,0 +1,40 @@
+Time Complexity = O(h)
+
+Node* inOrderSucc(Node* root){
+    while(root->left!=NULL) root=root->left;
+    return root;
+}
+Node *deleteNode(Node *root,  int x)
+{
+    // your code goes here
+    if(root==NULL) return NULL;
+    if(root->data>x){
+        root->left=deleteNode(root->left,x);
+    }
+    else if(root->data<x){
+        root->right=deleteNode(root->right,x);
+    }
+    else {
+        if(root->left==NULL && root->right==NULL){
+            Node* tmp=root;
+            free(tmp);
+            root=NULL;
+        }
+        else if(root->left==NULL){
+            Node* tmp=root;
+            root=root->right;
+            free(tmp);
+        }
+        else if(root->right==NULL){
+            Node* tmp=root;
+            root=root->left;
+            free(tmp);
+        }
+        else{
+            Node* ptr=inOrderSucc(root->right);
+            root->data=ptr->data;
+            root->right=deleteNode(root->right,ptr->data);
+        }
+    }
+    return root;
+}
