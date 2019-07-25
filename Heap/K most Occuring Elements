@@ -1,0 +1,30 @@
+Time Complexity = O(n+k+(n-k)logk+k)        ==  O(n+(n-k)logk)
+
+int print_N_mostFrequentNumber(int arr[],int n, int k) 
+{ 
+	// Your code here	 
+	int hash[1000000]={0};
+	for(int i=0;i<n;i++){                                   //O(n)
+	    hash[arr[i]]++;
+	}
+	priority_queue<int,vector<int>,greater<int> >pq;
+	for(int i=0;i<1000000;i++){                            //O(k+(n-k)logk)
+	    if(hash[i]!=0){
+    	    if(pq.size()==k){
+    	        if(hash[i]>pq.top()){
+    	            pq.pop();
+    	            pq.push(hash[i]);
+    	        }
+    	    }
+    	    else {
+    	        pq.push(hash[i]);
+    	    }
+	    }
+	}
+	int ans=0;
+	while(!pq.empty()){                                //O(k)
+	    ans+=pq.top();
+	    pq.pop();
+	}
+	return ans;
+}
