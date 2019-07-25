@@ -1,0 +1,23 @@
+Time Complexity = O(nklogk)
+
+typedef pair<int, pair<int, int> > ppi;
+int *mergeKArrays(int arr[][N], int k)
+{
+//code here
+    priority_queue<ppi,vector<ppi>,greater<ppi> >pq;
+    for(int i=0;i<k;i++){
+        pq.push({arr[i][0],{i,0}});
+    }
+    int* output=new int[k*k];
+    int oi=0;
+    while(!pq.empty()){
+        ppi curr=pq.top();
+        pq.pop();
+        int i = curr.second.first;
+		int j = curr.second.second+1;
+        output[oi++]=curr.first;
+        if (j < k)
+			      pq.push({ arr[i][j], { i, j  } });
+    }
+    return output;
+}
