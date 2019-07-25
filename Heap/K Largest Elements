@@ -1,4 +1,6 @@
 Time Complexity = O(k+(n-k)logk+klogk)                //klogk for sorting
+
+Min Heap Implementation
  
 void heapify(int i,int n,int arr[]){
     int l=2*i+1;
