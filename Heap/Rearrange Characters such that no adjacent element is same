@@ -1,0 +1,33 @@
+Time Complexity = O(nlogd)   //where d is the unique elements
+
+string rearrangeString(string str){
+	// Your code here
+	int map[26]={0};
+	for(int i=0;i<str.length();i++){
+	    map[str[i]-'a']++;
+	    if(map[str[i]-'a']>(str.length()+1)/2) return str;
+	}
+	priority_queue<pair<int,char> >pq;
+	for(int i=0;i<26;i++){
+	    if(map[i]){
+	        pq.push({map[i],i+'a'});
+	    }
+	}
+	string s;
+	while(!pq.empty()){
+	    pair<int,char>ppi,ppj;
+	    ppi=pq.top();pq.pop();
+	    s.push_back(ppi.second);
+	    if(!pq.empty()){
+	        ppj=pq.top();pq.pop();
+	        s.push_back(ppj.second);
+	        if(--ppj.first){
+	            pq.push(ppj);
+	        }
+	    }
+	    if(--ppi.first){
+	        pq.push(ppi);
+	    }
+	}
+	return s;
+}
