@@ -41,3 +41,41 @@ void kthLargest(int arr[], int n, int k){
   for(int i=0;i<k;i++) cout<<output[i]<<" ";
   cout<<endl;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+or 
+
+
+
+void kthLargest(int arr[], int n, int k){
+    
+    priority_queue<int, vector<int>, greater<int>> q; // making Minheap
+    vector<int> v;
+    
+    for(int i = 0; i < n;i++){
+        if(q.size() == k){ // if size becomes equal to k
+            if(q.top() < arr[i]){ // if top element is smaller than arr[i]
+                q.pop();   
+                q.push(arr[i]);  
+            }
+        }
+        else
+            q.push(arr[i]);
+    }
+        
+    while(!q.empty()) v.push_back(q.top()), q.pop(); // push all heap elements in vector
+        
+    for(int i = v.size()-1;i>=0;i--)
+        cout << v[i] << " ";
+    cout << endl;
+}
