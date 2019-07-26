@@ -1,0 +1,25 @@
+Time Complexity = O(V+E)
+
+void bfsUtil(int s, vector<int> adj[], bool vis[]){
+    if(vis[s]) return ;
+    queue<int>q;
+    q.push(s);
+    vis[s]=1;
+    while(!q.empty()){
+        int v=q.front();q.pop();
+        cout<<v<<" ";
+        for(int u : adj[v]){
+            if(!vis[u]){
+                q.push(u);
+                vis[u]=1;
+            }
+        }
+    }
+}
+void bfs(vector<int> adj[],int n, bool vis[])
+{
+    // Your code here
+    for(int i=0;i<n;i++){
+      bfsUtil(i,adj,vis);      
+    }
+}
