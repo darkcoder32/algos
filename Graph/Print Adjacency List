@@ -1,0 +1,13 @@
+Time Complexity = O(V+E)
+
+void printGraph(vector<int> adj[], int V)
+{
+    // Your code here
+    for(int i=0;i<V;i++){
+        cout<<i;
+        for(int j=0;j<adj[i].size();j++){
+            cout<<"-> "<<adj[i][j];
+        }
+        cout<<endl;
+    }
+}
