@@ -1,0 +1,51 @@
+Time Complexity for simuntaneously printing median = O(nlogn)   else for inserting Time Complexity = O(logn)
+
+void FindMedian::insertHeap(int &x)    //logn
+{
+	// Your code here
+	int minSize=min.size();
+	int maxSize=max.size();
+	if(maxSize>minSize){
+	    if((double)x<getMedian()){
+	        int y=max.top();max.pop();
+	        min.push(y);
+	        max.push(x);
+	    }else min.push(x);
+	}
+	else if(maxSize<minSize){
+	    if((double) x >getMedian()){
+	        int y=min.top();min.pop();
+	        max.push(y);
+	        min.push(x);
+	    }
+	    else{
+	        max.push(x);
+	    }
+	}
+	else{
+	    if((double) x<getMedian()){
+	        max.push(x);
+	    }
+	    else{
+	        min.push(x);
+	    }
+	}
+}
+// Function to balance heaps
+void FindMedian::balanceHeaps()
+{
+	// Your code here
+	return;
+}
+// Function to return getMedian
+double FindMedian::getMedian()
+{
+	// Your code here
+	if(max.size()==0 && min.size()==0) return INT_MIN;
+	if(max.size()!=0 || min.size()!=0){
+	    if(max.size()==min.size()) return (double) (max.top()+min.top())/2.0;
+	    else if(max.size()>min.size()) return (double) max.top();
+	    else return (double) min.top();
+	}
+	
+}
