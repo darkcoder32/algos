@@ -16,8 +16,8 @@ void bfsUtil(int s, vector<int> adj[], bool vis[]){
         }
     }
 }
-void bfs(vector<int> adj[],int n, bool vis[])
-{
+void bfs(vector<int> adj[],int n, bool vis[])                  //also for disconnected graphs 
+{ 
     // Your code here
     for(int i=0;i<n;i++){
       bfsUtil(i,adj,vis);      
