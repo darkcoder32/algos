@@ -1,0 +1,32 @@
+Time Complexity = O(N*M)
+
+void dfsUtil(int i,int j,vector<int>mat[],int N,int M,vector<vector<bool>>&vis){
+    vis[i][j]=1;
+    int row[]={-1,-1,-1,0,0,1,1,1};
+    int col[]={-1,0,1,-1,1,-1,0,1};
+    int r,c;
+    for(int k=0;k<8;k++){
+        r=i+row[k];
+        c=j+col[k];
+        if(r>=0 && r<N && c>=0 && c<M && !vis[r][c] && mat[r][c]){
+            dfsUtil(r,c,mat,N,M,vis);
+        }
+    }
+}
+void dfs(vector<int>mat[],int N,int M,int &c){
+    vector<vector<bool>>vis(N, vector<bool>(M, false));
+    for(int i=0;i<N;i++){
+        for(int j=0;j<M;j++){
+            if(vis[i][j]==0 && mat[i][j]==1){
+                c++;
+                dfsUtil(i,j,mat,N,M,vis);
+            }
+        }
+    }
+}
+int findIslands(vector<int> A[], int N, int M)
+{
+    int c=0;
+    dfs(A,N,M,c);
+    return c;
+}
