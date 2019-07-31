@@ -1,0 +1,24 @@
+Time Complexity = O(V+E)
+
+void dfs(int s,vector<int>adj[],int V,int vis[],int par,int &c){
+    vis[s]=1;
+    for(int i=0;i<adj[s].size();i++){
+        if(vis[adj[s][i]] && adj[s][i]!=par){
+            c=1;
+        }
+        if(!vis[adj[s][i]]){
+            dfs(adj[s][i],adj,V,vis,s,c);
+        }
+    }
+}
+bool isCyclic(vector<int> adj[], int V)
+{
+    int vis[V]={0};
+    int par=-1;
+    int c=0;
+    for(int i=0;i<V;i++){
+        if(!vis[i])
+            dfs(i,adj,V,vis,par,c);
+    }
+    return c;
+}
