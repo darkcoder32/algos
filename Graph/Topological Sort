@@ -1,0 +1,24 @@
+Time Complexity = O(V+E)
+
+void dfs(int s,vector<int>adj[],int V,int vis[],int arr[],int &ind){
+    vis[s]=1;
+    for(int i=0;i<adj[s].size();i++){
+        if(!vis[adj[s][i]]){
+            dfs(adj[s][i],adj,V,vis,arr,ind);
+        }
+    }
+    arr[ind--]=s;
+}
+int* topoSort(int V, vector<int> adj[])
+{
+    // Your code here
+    int *arr=new int[V];
+    int ind=V-1;
+    int vis[V]={0};
+    for(int i=0;i<V;i++){
+        if(!vis[i]){
+            dfs(i,adj,V,vis,arr,ind);
+        }
+    }
+    return arr;
+}
