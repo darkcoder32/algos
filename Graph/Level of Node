@@ -1,0 +1,22 @@
+Time Complexity = O(V+E)
+
+int bfs(int s, vector<int> adj[], bool vis[],int vertex,int V){
+    int level[V];
+    queue<int>q;
+    q.push(s);
+    vis[s]=1;
+    level[s]=0;
+    while(!q.empty()){
+        int v=q.front();q.pop();
+        
+        for(int u : adj[v]){
+            if(!vis[u]){
+                q.push(u);
+                vis[u]=1;
+                level[u]=level[v]+1;
+            }
+            if(u==vertex)
+                return level[u];
+        }
+    }
+}
