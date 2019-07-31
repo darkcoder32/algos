@@ -1,0 +1,27 @@
+Time Complexity = O(V+E)
+
+void dfs(int s,vector<int>adj[],int V,vector<bool> &vis,int &c,vector<bool>&recStack){
+    vis[s]=1;
+    recStack[s]=1;
+    for(int i=0;i<adj[s].size();i++){
+        if(vis[adj[s][i]] && recStack[adj[s][i]]){
+            c=1;
+            return ;
+        }
+        if(!vis[adj[s][i]]){
+            dfs(adj[s][i],adj,V,vis,c,recStack);
+        }
+    }
+    recStack[s]=0;
+}
+bool isCyclic(int V ,vector<int> adj[])
+{
+    vector<bool>vis(V);
+    vector<bool>recStack(V);
+    int c=0;
+    for(int i=0;i<V;i++){
+        if(!vis[i])
+            dfs(i,adj,V,vis,c,recStack);
+    }
+    return c;
+}
