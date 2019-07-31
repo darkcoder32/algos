@@ -1,0 +1,22 @@
+Time Complexity = O(V!) = VlogV
+
+void dfs(int s,list<int> *adj,vector<bool> &vis,int &ans,int d){
+    if(s==d)
+        ans++;
+    else{
+        vis[s]=1;
+        for(auto x: adj[s]){
+            if(!vis[x]){
+                dfs(x,adj,vis,ans,d);
+            }
+        }
+        vis[s]=0;
+    }
+}
+int Graph::countPaths(int s, int d) 
+{ 
+    vector<bool>vis(V);
+    int ans=0;
+    dfs(s,adj,vis,ans,d);
+    return ans;
+} 
