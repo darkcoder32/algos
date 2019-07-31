@@ -1,0 +1,52 @@
+Time Complexity = O(n*n)
+
+void dfsUtil(int i,int j,vector<int>mat[],int N,int M,vector<vector<bool>>&vis,int &ans){
+    vis[i][j]=1;
+    int row[]={-1,0,0,1};
+    int col[]={0,-1,1,0};
+    int r,c;
+    for(int k=0;k<4;k++){
+        r=i+row[k];
+        c=j+col[k];
+        if(r>=0 && r<N && c>=0 && c<M && !vis[r][c] && mat[r][c]==3){
+            dfsUtil(r,c,mat,N,M,vis,ans);
+        }
+        else if(r>=0 && r<N && c>=0 && c<M && !vis[r][c] && mat[r][c]==2){
+            ans=1;
+            return;
+        }
+    }
+}
+void dfs(vector<int>mat[],int N,int M,int &ans){
+    vector<vector<bool>>vis(N, vector<bool>(M, false));
+    for(int i=0;i<N;i++){
+        for(int j=0;j<M;j++){
+            if(vis[i][j]==0 && mat[i][j]==1){
+                dfsUtil(i,j,mat,N,M,vis,ans);
+            }
+        }
+    }
+}
+int main() {
+	int t;
+	cin>>t;
+	while(t--){
+	    int n;
+	    cin>>n;
+	    vector<int>adj[n];
+	    for(int i=0;i<n;i++){
+	        vector<int>tmp(n);
+	        adj[i]=tmp;
+	        for(int j=0;j<adj[i].size();j++){
+	            int data;
+	            cin>>data;
+	            adj[i][j]=data;
+	        }
+	    }
+	    int ans=0;
+	    dfs(adj,n,n,ans);
+	    cout<<ans<<endl;
+	}
+	
+	return 0;
+}
