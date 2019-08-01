@@ -1,0 +1,64 @@
+Time Complexity = O(N*M)
+
+#define F first
+#define S second
+#define ppi pair<int,int>
+int  bfs(vector<vector<int>>adj,int n,int m){
+    queue<ppi>q;
+    vector<vector<bool>>vis(n,vector<bool>(m,false));
+    int row[]={-1,0,0,1};
+    int col[]={0,-1,1,0};
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            if(adj[i][j]==2){
+                q.push({i,j});
+                vis[i][j]=true;
+            }
+        }
+    }
+    int ans=-1;
+    while(!q.empty()){
+        int size=q.size();
+        ans++;
+        while(size){
+            ppi tmp=q.front();q.pop();
+            adj[tmp.F][tmp.S]=0;
+            for(int k=0;k<4;k++){
+                int r=tmp.F+row[k];
+                int c=tmp.S+col[k];
+                if(r>=0 && r<n && c>=0 && c<m){
+                    if(!vis[r][c] && adj[r][c]==1){
+                        q.push({r,c});
+                        vis[r][c]=true;
+                    }
+                }
+            }
+            size--;
+        }
+        
+    }
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            if(adj[i][j]!=0) return -1;
+        }
+    }
+    return ans;
+}
+int main() {
+	int t;
+	cin>>t;
+	while(t--){
+	    int n,m;
+	    cin>>n>>m;
+	    vector<vector<int>>adj(n,vector<int>(m));
+	    for(int i=0;i<n;i++){
+	        for(int j=0;j<m;j++){
+	            int data;
+	            cin>>data;
+	            adj[i][j]=data;
+	        }
+	    }
+	    cout<<bfs(adj,n,m)<<endl;
+	}
+	return 0;
+}
