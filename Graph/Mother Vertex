@@ -1,0 +1,33 @@
+Time Complexity = O(V+E)               //Basic dfs Traversal
+                                       //last visited vertex can be mother vertex
+
+void dfs(int s, vector<int> adj[],vector<bool>&vis)
+{
+    
+    // Your code here
+    vis[s]=1;
+    for(int i=0;i<adj[s].size();i++){
+        if(!vis[adj[s][i]]){
+            dfs(adj[s][i],adj,vis);
+        }
+    }
+}
+int findMother(int V, vector<int> adj[]) 
+{ 
+    vector<bool>vis(V,false);
+    int v;
+    for(int i=0;i<V;i++){
+        if(!vis[i]){
+            dfs(i,adj,vis);
+            v=i;
+        }
+    }
+    fill(vis.begin(),vis.end(),false);
+    dfs(v,adj,vis);
+    for(int i=0;i<vis.size();i++){
+        if(vis[i]== false){
+            return -1;
+        } 
+    }
+    return v;
+}
