@@ -1,5 +1,8 @@
 Time Complexity = O(N*M)
 
+#define F first
+#define S second
+#define ppi pair<int,int>
 void bfs(vector<vector<int>>&arr,int N,int M,vector<vector<int>>&dis){
     queue<ppi>q;
     int row[]={-1,0,0,1};
