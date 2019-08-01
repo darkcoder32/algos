@@ -1,0 +1,34 @@
+Time Complexity = O(N*M)
+
+void dfsUtil(int i,int j,int mat[][SIZE],int N,int M,vector<vector<bool>>&vis,int &ans,int &count){
+    vis[i][j]=1;
+    count++;
+    int row[]={-1,-1,-1,0,0,1,1,1};
+    int col[]={-1,0,1,-1,1,-1,0,1};
+    int r,c;
+    for(int k=0;k<8;k++){
+        r=i+row[k];
+        c=j+col[k];
+        if(r>=0 && r<N && c>=0 && c<M && !vis[r][c] && mat[r][c]){
+            dfsUtil(r,c,mat,N,M,vis,ans,count);
+        }
+    }
+}
+void dfs(int mat[][SIZE],int N,int M,int &ans,int &count){
+    vector<vector<bool>>vis(N, vector<bool>(M, false));
+    for(int i=0;i<N;i++){
+        for(int j=0;j<M;j++){
+            if(vis[i][j]==0 && mat[i][j]==1){
+                count=0;
+                dfsUtil(i,j,mat,N,M,vis,ans,count);
+                if(count>ans) ans=count;
+            }
+        }
+    }
+}
+int findAreaUtil(int n, int m, int g[SIZE][SIZE], bool vis[SIZE][SIZE]){
+    
+    int ans=INT_MIN,count;
+    dfs(g,n,m,ans,count);
+    return ans; 
+}
