@@ -1,0 +1,33 @@
+Time Complexity = O(N*M)
+
+void bfs(vector<vector<int>>&arr,int N,int M,vector<vector<int>>&dis){
+    queue<ppi>q;
+    int row[]={-1,0,0,1};
+    int col[]={0,-1,1,0};
+    for(int i=0;i<N;i++){
+        for(int j=0;j<M;j++){
+            if(arr[i][j]==1){
+                dis[i][j]=0;
+                q.push({i,j});
+            }
+        }
+    }
+    while(!q.empty()){
+        ppi tmp=q.front(); q.pop();
+        for(int k=0;k<4;k++){
+            int r=tmp.F+row[k];
+            int c=tmp.S+col[k];
+            if(r>=0 && r<N && c>=0 && c<M){
+                if(dis[r][c]>dis[tmp.F][tmp.S]+1){
+                    dis[r][c]=dis[tmp.F][tmp.S]+1;
+                    q.push({r,c});
+                }
+            }
+        }
+    }
+}
+void nearest(vector<vector<int>> arr, int row, int col){
+    vector<vector<int>>dis(row,vector<int>(col,INT_MAX));
+	bfs(arr,row,col,dis);
+	print(dis,row,col);
+}
