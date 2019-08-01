@@ -1,0 +1,43 @@
+Time Complexity = O(N*N)
+
+#define F first
+#define S second
+#define ppi pair<int,int>
+int bfs(vector<vector<bool>>&vis,vector<vector<int>>&level,int n,int x,int y,int tx,int ty){
+    queue<ppi>q;
+    q.push({x,y});
+    vis[x][y]=1;
+    int row[]={-2,-2,-1,-1,1,1,2,2};
+    int col[]={-1,1,-2,2,-2,2,-1,1};
+    level[x][y]=0;
+    while(!q.empty()){
+        ppi tmp=q.front();q.pop();
+        for(int k=0;k<8;k++){
+            int r=tmp.F+row[k];
+            int c=tmp.S+col[k];
+            if(r>=0 && r<n && c>=0 && c<n){
+                if(!vis[r][c]){
+                    q.push({r,c});
+                    level[r][c]=level[tmp.F][tmp.S]+1;
+                    vis[r][c]=1;
+                }
+            }
+        }
+    }
+    return level[tx][ty];
+}
+int main() {
+	int t;
+	cin>>t;
+	while(t--){
+	    int n;
+	    cin>>n;
+	    vector<vector<bool>>vis(n,vector<bool>(n,false));
+	    vector<vector<int>>level(n,vector<int>(n,INT_MAX));
+	    int x,y,tx,ty;
+	    cin>>x>>y>>tx>>ty;
+	    x--;y--;tx--;ty--;
+	    cout<<bfs(vis,level,n,x,y,tx,ty)<<endl;
+	}
+	return 0;
+}
