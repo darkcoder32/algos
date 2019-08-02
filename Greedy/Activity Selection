@@ -1,0 +1,25 @@
+Time Complexity = O(nlogn)
+
+#define F first
+#define S second
+#define ppi pair<int,int>
+bool compare(const ppi &a,const ppi &b){
+    return (a.second<b.second);
+}
+int activitySelection(int start[], int end[], int n){
+    // Your code here
+    vector<ppi>v;
+    for(int i=0;i<n;i++){
+        v.push_back({start[i],end[i]});
+    }
+    sort(v.begin(),v.end(),compare);
+    int ans=1;
+    ppi last=v[0];
+    for(int i=1;i<n;i++){
+        if(v[i].F>=last.S){
+            ans++;
+            last=v[i];
+        }
+    }
+    return ans;
+}
