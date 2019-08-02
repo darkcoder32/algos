@@ -1,0 +1,3 @@
+#define first F
+#define second S
+#define pair<int,int>
