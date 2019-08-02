@@ -1,0 +1,14 @@
+bool compare(const ppi &a,const ppi &b){
+    return (a.second<b.second);
+}
+
+
+
+bool compare(const int &a ,const int &b){
+    return (a<b);
+}
+
+
+bool compare(const int &a ,const int &b){                    //greater<int>   implementation
+    return (a>b);
+}
