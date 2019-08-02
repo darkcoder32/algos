@@ -1,4 +1,4 @@
-Time Complexity = O(size of string)
+Time Complexity = O(size of binary string)
 
 string decodeHuffmanData(struct MinHeapNode* root, string binaryString)
 {
