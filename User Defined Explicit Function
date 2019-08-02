@@ -12,3 +12,12 @@ bool compare(const int &a ,const int &b){
 bool compare(const int &a ,const int &b){                    //greater<int>   implementation
     return (a>b);
 }
+
+
+struct compare
+{
+	bool operator()(MinHeapNode* l, MinHeapNode* r)
+	{
+		return (l->freq > r->freq);
+	}
+};
