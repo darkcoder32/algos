@@ -1,0 +1,26 @@
+Time Complexity = O(nlogn)          //due to sorting
+
+bool compare(const Item &a,const Item &b){
+    double r1=(double)a.value/a.weight;
+    double r2=(double)b.value/b.weight;
+    return r1>r2;
+}
+double fractionalKnapsack(int W, Item arr[], int n)
+{
+    // Your code here
+    double ans=0;
+    sort(arr,arr+n,compare);
+    int i=0;
+    while(W && i<n){
+        if(W>=arr[i].weight){
+            ans+=arr[i].value;
+            W-=arr[i].weight;
+        }
+        else{
+            ans+=arr[i].value*((double)W/(double)arr[i].weight);
+            W=0;
+        }
+        i++;
+    }
+    return ans;
+}
