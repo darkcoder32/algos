@@ -1,3 +1,5 @@
-#define first F
-#define second S
-#define pair<int,int> ppi
+#define F first
+#define S second
+#define ppi pair<int,int>
+#define ppii pair<pair<int,int>,int>
+#define mkp make_pair
