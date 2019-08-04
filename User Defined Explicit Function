@@ -21,3 +21,10 @@ struct compare
 		return (l->freq > r->freq);
 	}
 };
+
+
+bool compare(const train &a,const train &b){
+    if(a.t==b.t)
+        return a.type<b.type;
+    return a.t<b.t;
+}
