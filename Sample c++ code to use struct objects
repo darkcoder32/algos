@@ -1,0 +1,35 @@
+struct train
+{
+    int t;
+    char type;
+};
+bool compare(const train &a,const train &b){
+    return (a.t<=b.t);
+}
+int findPlatform(int arr[], int dep[], int n){
+
+    int size=2*n;    
+    train a[size];
+    int i=0;
+    for(;i<n;i++){
+        a[i].t=arr[i];
+        a[i].type='A';
+    }
+    for(int j=0;j<n;j++){
+        a[i+j].t=dep[j];
+        a[i+j].type='D';
+    }
+    sort(a,a+size,compare);
+    int ans=0;
+    int count=0;
+    for(int j=0;j<size;j++){
+        if(a[j].type=='A'){
+            count++;
+        }
+        else {
+            count--;
+        }
+        ans=max(ans,count);
+    }
+    return ans;
+}
