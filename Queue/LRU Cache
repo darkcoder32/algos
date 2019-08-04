@@ -14,7 +14,7 @@ LRUCache::LRUCache(int N)
 void LRUCache::set(int key, int value) 
 {
      //Your code here
-     //if key already exist
+     //if key not already exist
      if(mp.find(key)==mp.end()){
         if(que.size()==csize){
             int k=que.back();
