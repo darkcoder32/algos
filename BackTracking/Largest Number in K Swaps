@@ -1,4 +1,4 @@
-O(n^(2k+2))
+O(n^(2(k+1)))
 
 void findMaximumNum(string str, int k, string& max)
 {
