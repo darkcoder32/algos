@@ -1,0 +1,36 @@
+Time Complexity = O(n*n)
+
+bool safe(int n,int (*m)[MAX],int x,int y){
+    if(x<0 || x>=n || y<0 || y>=n) return false;
+    return true;
+}
+bool maze(int n,int (*m)[MAX],int x,int y,int (*vis)[MAX]){
+    if(x==n-1 && y==n-1){
+        vis[x][y]=1;
+        return true;
+    }
+    int jump=m[x][y];
+    vis[x][y]=1;
+    for(int j=1;j<=jump;j++){
+        if(safe(n,m,x,j+y)){
+            if(maze(n,m,x,j+y,vis)==true)return true;
+        }
+        if(safe(n,m,j+x,y)){
+            if(maze(n,m,j+x,y,vis)==true)return true;
+        }
+    }
+    vis[x][y]=0;
+    return false;
+}
+bool solve(int x,int (*m)[MAX])
+{
+    // Your code here
+    int vis[100][100];
+    memset(vis,0,sizeof(vis));
+    if(maze(x,m,0,0,vis)==false){
+        cout<<"-1"<<endl;
+        return false;
+    }
+    print(x,vis);
+    return true;
+}
