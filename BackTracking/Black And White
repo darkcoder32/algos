@@ -1,0 +1,28 @@
+Time Complexity = O(n*n)
+
+bool safe(int x,int y, int m, int n){
+    if(x>=0 && x<n && y>=0 && y<m) return true;
+    return false;
+}
+
+#define l unsigned long long
+unsigned long long solve(int m,int n)
+{
+    l ans=0;
+    int row[]={-2,-2,-1,-1,1,1,2,2};
+    int col[]={-1,1,-2,2,-2,2,-1,1};
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            int reject=0;
+            for(int k=0;k<8;k++){
+                int x=i+row[k];
+                int y=j+col[k];
+                if(safe(x,y,m,n)){
+                    reject++;
+                }
+            }
+            ans=ans+(n*m-1)-reject;
+        }
+    }
+    return ans;
+}
