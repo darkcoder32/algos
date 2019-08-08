@@ -1,0 +1,6 @@
+//sorting of vector or multidimentional vector
+sort (v.begin(),v.end());
+
+//remove duplicates from vector
+v.erase(unique(v.begin(),v.end()),v.end());       //also works on multi-dimentional array
+
