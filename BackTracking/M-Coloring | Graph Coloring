@@ -1,0 +1,32 @@
+Time Complexity = O(exponential)
+
+bool safe(bool graph[101][101],vector<int>&color,int k,int c,int V){
+    for(int i=0;i<V;i++){
+        if(graph[k][i]==1 && c==color[i]) return false;
+    }
+    return true;
+}
+bool graphColoringUtil(bool graph[101][101],vector<int>&color,int V,int k,int m){
+    for(int c=1;c<=m;c++){
+        if(safe(graph,color,k,c,V)){
+            color[k]=c;
+            if(k+1<V){
+                if(graphColoringUtil(graph,color,V,k+1,m)) return true;
+            }
+            else return true;
+            color[k]=0;
+        }
+    }
+    return false;
+}
+bool graphColoring(bool graph[101][101], int m,int V)
+{
+    vector<int>color(V,0);
+    bool ans=graphColoringUtil(graph,color,V,0,m);
+    if(ans){
+        cout<<"1"<<endl;
+        return true;
+    }
+    else cout<<"0"<<endl;
+    return false;
+}
