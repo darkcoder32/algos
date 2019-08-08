@@ -1,0 +1,43 @@
+Time Complexity = O(exponential)
+
+bool findAssign(int &row,int &col,int grid[N][N]){
+    for(int i=0;i<N;i++){
+        for(int j=0;j<N;j++){
+            if(grid[i][j]==0){
+                row=i;
+                col=j;
+                return true;
+            }
+        }
+    }
+    return false;
+}
+bool safe(int grid[N][N],int x,int y,int value){
+    int x_mul=(x/3)*3;
+    int y_mul=(y/3)*3;
+    for(int i=x_mul;i<x_mul+3;i++){
+        for(int j=y_mul;j<y_mul+3;j++){
+            if(value==grid[i][j]) return false;
+        }
+    }
+    for(int i=0;i<N;i++){
+        if(grid[x][i]==value) return false;
+    }
+    for(int i=0;i<N;i++){
+        if(grid[i][y]==value) return false;
+    }
+    return true;
+}
+bool SolveSudoku(int grid[N][N])  
+{ 
+    int row,col;
+    if(!findAssign(row,col,grid)) return true;
+    for(int k=1;k<=9;k++){
+        if(safe(grid,row,col,k)){
+            grid[row][col]=k;
+            if(SolveSudoku(grid))return true;
+            grid[row][col]=0;
+        }
+    }
+    return false;
+}
