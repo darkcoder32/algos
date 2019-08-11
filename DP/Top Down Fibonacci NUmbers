@@ -1,0 +1,11 @@
+Time Complexity = O(n)
+
+long long findNthFibonacci(int number)
+{
+  if(dp[number]>0)
+  return dp[number];
+  
+  //Complete this line. dp[number] is equal to function(n-1)+function(n-2)
+  dp[number]=findNthFibonacci(number-1)+findNthFibonacci(number-2);
+  return dp[number];
+}
