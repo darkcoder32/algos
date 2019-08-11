@@ -1,0 +1,130 @@
+Time Taken = 0.03     //array based solution
+Time Complexity = O(n*k)
+Space Complexity= O(k)
+
+lli Bcof(lli  dp[],int n,int r){
+    dp[0]=1;
+    for(int i=1;i<=n;i++){
+        for(int j=min(r,i);j>0;j--){
+            dp[j]=(dp[j]%mod+dp[j-1]%mod)%mod;
+        }
+    }
+    return dp[r];
+}
+int main()
+ {
+	int t;
+	cin>>t;
+	while(t--){
+	    int n,r;
+	    cin>>n>>r;
+        lli dp[r+1]={0};
+		cout<<Bcof(dp,n,r);
+		
+		cout<<endl;
+	}
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+Time Taken = 0.05     //vector based solution
+Time Complexity = O(n*k)
+Space Complexity= O(k)
+
+lli Bcof(vlli &dp,int n,int r){
+    dp[0]=1;
+    for(int i=1;i<=n;i++){
+        for(int j=min(r,i);j>0;j--){
+            dp[j]=(dp[j]%mod+dp[j-1]%mod)%mod;
+        }
+    }
+    return dp[r];
+}
+int main()
+ {
+	int t;
+	cin>>t;
+	while(t--){
+	    int n,r;
+	    cin>>n>>r;
+        vlli dp(r+1,0);
+		cout<<Bcof(dp,n,r);
+		
+		cout<<endl;
+	}
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+Time taken = 0.08
+Time Complexity = o(n*k)
+Space Complexity = O(n*k)
+
+lli Bcof(vvlli &dp,int n,int r){
+    if(n<r) return 0;
+    if(dp[n][r]>0) return dp[n][r];
+    if(r==0 || r==n) return 1;
+    dp[n][r]=(Bcof(dp,n-1,r-1)%mod+Bcof(dp,n-1,r)%mod)%mod;
+    return dp[n][r];
+}
+int main()
+ {
+	int t;
+	cin>>t;
+	while(t--){
+	    int n,r;
+	    cin>>n>>r;
+		vvlli dp(n+1,vector<lli>(r+1,0));
+		cout<<Bcof(dp,n,r);
+		
+		cout<<endl;
+	}
+	return 0;
+}
+
+
+
+Template Used
+#include<bits/stdc++.h>
+#include <boost/multiprecision/cpp_int.hpp> 
+using boost::multiprecision::cpp_int;
+using namespace std;
+
+#define F first
+#define S second
+#define pii pair<int,int>
+#define ppiii pair<pair<int,int>,int>
+#define ppssi pair<pair<string,string>,int>
+#define mkp make_pair
+#define vi vector<int>
+#define vvi vector<vector<int>>
+#define vll vector<long long>
+#define vlli vector<long long int>
+#define vvll vector<vector<long long>>
+#define vvlli vector<vector<long long int>>
+#define vulli vector<unsigned long long int>
+#define vvulli vector<vector<unsigned long long int>>
+#define loopi(i,n) for(int i = 0; i < n; i++)
+#define loopj(j,n) for(int j = 0; j < n; j++)
+#define ll long long
+#define lli long long int 
+#define ulli unsigned long long int
+#define mod 1000000007
