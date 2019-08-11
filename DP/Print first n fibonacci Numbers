@@ -1,0 +1,49 @@
+Time Complexity = O(n)
+
+#include<bits/stdc++.h>
+using namespace std;
+
+#define F first
+#define S second
+#define pii pair<int,int>
+#define ppiii pair<pair<int,int>,int>
+#define ppssi pair<pair<string,string>,int>
+#define mkp make_pair
+#define vi vector<int>
+#define vvi vector<vector<int>>
+#define vll vector<long long>
+#define vlli vector<long long int>
+#define vvll vector<vector<long long>>
+#define vvlli vector<vector<long long int>>
+#define loopi(i,n) for(int i = 0; i < n; i++)
+#define loopj(j,n) for(int j = 0; j < n; j++)
+#define ll long long
+#define lli long long int 
+
+lli fibonacci(vi &dp,int n){
+    if(dp[n]>0) return dp[n];
+    dp[n]=fibonacci(dp,n-1)+fibonacci(dp,n-2);
+}
+void print(vlli &dp){
+    int n=dp.size();
+    for(int i=1;i<n;i++){
+        cout<<dp[i]<<" ";
+    }
+    cout<<endl;
+}
+int main()
+ {
+	int t;
+	cin>>t;
+	while(t--){
+	    int n;
+	    cin>>n;
+	    vector<lli>dp(n+1,0);
+	    dp[0]=0;
+	    dp[1]=1;
+	    dp[2]=1;
+	    fibonacci(dp,n);
+	    print(dp);
+	}
+	return 0;
+}
