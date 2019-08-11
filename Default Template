@@ -1,5 +1,21 @@
+#include<bits/stdc++.h>
+using namespace std;
+
 #define F first
 #define S second
 #define ppi pair<int,int>
 #define ppii pair<pair<int,int>,int>
 #define mkp make_pair
+
+int main()
+ {
+	int t;
+	cin>>t;
+	while(t--){
+	    int n;
+	    cin>>n;
+	    
+	    
+	}
+	return 0;
+}
