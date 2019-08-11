@@ -24,7 +24,6 @@ using namespace std;
 #define ulli unsigned long long int
 #define mod 1000000007
 
-
 int main()
  {
 	int t;
