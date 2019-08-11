@@ -1,5 +1,3 @@
-Time Complexity = O(n)
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -20,7 +18,7 @@ using namespace std;
 #define ll long long
 #define lli long long int 
 
-lli fibonacci(vi &dp,int n){
+lli fibonacci(vlli &dp,int n){
     if(dp[n]>0) return dp[n];
     dp[n]=fibonacci(dp,n-1)+fibonacci(dp,n-2);
 }
