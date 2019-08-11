@@ -1,0 +1,13 @@
+Time Complexity = O(n)
+
+long long findNthFibonacci(int number)
+{
+  if(dp[number]>0)
+  return dp[number];
+  
+  for(int i=3;i<=number;i++)
+//Complete this function do dp[i] = dp[i-1]+dp[i-2]
+  dp[i]=dp[i-1]+dp[i-2];
+  return dp[number];
+  
+}
