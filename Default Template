@@ -22,6 +22,7 @@ using namespace std;
 #define ll long long
 #define lli long long int 
 #define ulli unsigned long long int
+#define mod 1000000007
 
 
 int main()
