@@ -1,0 +1,69 @@
+Time Complexity = O(n)
+//dp solution
+
+int coin_count(vi &dp,int coins[],int n,int value){
+    if(value<0) {
+        return INT_MAX;
+    }
+    if(dp[value]!=-1) return dp[value];
+    if(value==0) return 0;
+    int x=INT_MAX;
+    for(int i=0;i<n;i++){
+        x=min(x,coin_count(dp,coins,n,value-coins[i]));
+    }
+    if(x==INT_MAX){
+        dp[value]=INT_MAX;
+    }
+    else{
+        dp[value]=x+1;   
+    }
+    return dp[value];
+}
+int minimumNumberOfCoins(int coins[],int n,int value)
+{
+    vi dp(value+1,-1);
+    return coin_count(dp,coins,n,value);
+}
+
+
+
+
+
+
+
+
+
+Time Complexity = exponential
+//recursive solution
+int minimumNumberOfCoins(int coins[],int n,int value,int noOfCoins=0)
+{
+    if(value<0) return INT_MAX;
+    if(value==0) return noOfCoins;
+    int x=INT_MAX;
+    loopi(i,n){
+        x=min(x,minimumNumberOfCoins(coins,n,value-coins[i],noOfCoins+1));
+    }
+    return x; 
+}
+
+Template Use
+#define F first
+#define S second
+#define pii pair<int,int>
+#define ppiii pair<pair<int,int>,int>
+#define ppssi pair<pair<string,string>,int>
+#define mkp make_pair
+#define vi vector<int>
+#define vvi vector<vector<int>>
+#define vll vector<long long>
+#define vlli vector<long long int>
+#define vvll vector<vector<long long>>
+#define vvlli vector<vector<long long int>>
+#define vulli vector<unsigned long long int>
+#define vvulli vector<vector<unsigned long long int>>
+#define loopi(i,n) for(int i = 0; i < n; i++)
+#define loopj(j,n) for(int j = 0; j < n; j++)
+#define ll long long
+#define lli long long int 
+#define ulli unsigned long long int
+#define mod 1000000007
