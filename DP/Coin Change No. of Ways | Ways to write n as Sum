@@ -13,3 +13,26 @@ long long numberOfWays(int coins[],int n,int value)
     }
     return dp[value];
 }
+
+
+
+
+
+
+
+
+
+Time Complexity = O(n*n)
+int countWays(int n)
+{
+    int dp[n+1]={0};
+    dp[0]=1;
+    for(int i=1;i<n;i++){
+        for(int j=1;j<n+1;j++){
+            if(i<=j){
+                dp[j]=(dp[j]%mod+dp[j-i]%mod)%mod;
+            }
+        }
+    }
+    return dp[n];
+}
