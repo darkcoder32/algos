@@ -1,0 +1,15 @@
+Time Complexity = O(n*value)
+
+long long numberOfWays(int coins[],int n,int value)
+{
+    long long dp[value+1]={0};
+    dp[0]=1;
+    for(int i=0;i<n;i++){
+        for(int j=0;j<value+1;j++){
+            if(coins[i]<=j){
+                dp[j]+=dp[j-coins[i]];
+            }
+        }
+    }
+    return dp[value];
+}
