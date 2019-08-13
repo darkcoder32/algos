@@ -1,0 +1,34 @@
+Time  Complexity = O(n)
+Space Complexity = O(1)
+long long sumSubstrings(string s){
+    
+    long long prev;
+    prev=(s[0]-'0');
+    long long res=prev;
+    for(int i=1;i<s.size();i++){
+        prev=(i+1)*(s[i]-'0')+10*(prev);
+        res+=prev;
+    }
+    return res;
+}
+
+
+
+
+
+
+
+
+DP Solution
+Time Complexity = O(n)
+long long sumSubstrings(string s){
+    
+    long long dp[s.size()];
+    dp[0]=(s[0]-'0');
+    long long res=dp[0];
+    for(int i=1;i<s.size();i++){
+        dp[i]=(i+1)*(s[i]-'0')+10*(dp[i-1]);
+        res+=dp[i];
+    }
+    return res;
+}
