@@ -1,0 +1,88 @@
+Time Complexity = O(n)
+int jumps(int arr[],int n){
+    if(arr[0]==0) return -1;
+    int ladder=arr[0];
+    int stairs=arr[0];
+    int jump=1;
+    for(int i=1;i<n;i++){
+        if(i==n-1) return jump;
+        if(i+arr[i]>ladder)
+            ladder=i+arr[i];
+        stairs--;
+        if(stairs==0){
+            stairs=ladder-i;
+            jump++;
+        }
+        if(stairs<=0) return -1;
+    }
+}
+
+
+
+
+
+
+
+
+
+Time Complexity = O(exponential)                             //recursive Solution
+int jumps(int arr[],int n,int i,int ans){
+    if(i+1>=n) return ans;
+    int x=INT_MAX;
+    for(int j=i;j>=0;j--){
+        x=min(x,jumps(arr,n,arr[j]+i,ans+1));   
+    }
+    return x;
+}
+
+
+
+
+
+
+
+
+
+Template Used
+#include<bits/stdc++.h>
+#include <boost/multiprecision/cpp_int.hpp> 
+using boost::multiprecision::cpp_int;
+using namespace std;
+
+#define F first
+#define S second
+#define pii pair<int,int>
+#define ppiii pair<pair<int,int>,int>
+#define ppssi pair<pair<string,string>,int>
+#define mkp make_pair
+#define vi vector<int>
+#define vvi vector<vector<int>>
+#define vll vector<long long>
+#define vlli vector<long long int>
+#define vvll vector<vector<long long>>
+#define vvlli vector<vector<long long int>>
+#define vulli vector<unsigned long long int>
+#define vvulli vector<vector<unsigned long long int>>
+#define loopi(i,n) for(int i = 0; i < n; i++)
+#define loopj(j,n) for(int j = 0; j < n; j++)
+#define ll long long
+#define lli long long int 
+#define ulli unsigned long long int
+#define mod 1000000007
+
+int main()
+ {
+	int t;
+	cin>>t;
+	while(t--){
+	    int n,ans=0;
+	    cin>>n;
+	    int arr[n];
+		loopi(i,n){
+		    cin>>arr[i];
+		}
+// 		if(jumps(arr,n,0,ans)== INT_MAX) cout<<"-1"<<endl;
+		cout<<jumps(arr,n)<<endl;
+	}
+	return 0;
+}
