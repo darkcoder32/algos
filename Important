@@ -1,0 +1,5 @@
+stringstream geek(str);
+        int x=0;
+        geek >> x;
+        sum+=x;
+        return;
