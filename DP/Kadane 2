@@ -1,0 +1,18 @@
+Time Complexity = O(n)
+long long maximumSum(int arr[], int n)
+{
+   vector<long long>dp(n); //declaring dp array 
+   dp[0]=max((int)dp[0],arr[0]);
+   dp[1]=max((int)dp[0],arr[1]);
+   int negative_max=max(arr[0],arr[1]);
+   int count_negative=0;
+   if(arr[0]<0) count_negative++;
+   if(arr[1]<0) count_negative++;
+   for(int i=2;i<n;i++){
+       dp[i]=max(dp[i-1],dp[i-2]+(long)arr[i]);
+       if(arr[i]<0) count_negative++;
+       if(arr[i]>negative_max) negative_max=arr[i];
+   }
+   if(count_negative==n) return negative_max;
+   return dp[n-1];
+}
