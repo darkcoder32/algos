@@ -1,0 +1,24 @@
+Time Complexity = O(n)
+Space Complexity = O(n)
+int maxSumSubarray(int arr[], int n)
+{
+    int fn[n],bw[n];
+    int curr_max=arr[0];
+    int max_so_far=arr[0];
+    fn[0]=arr[0];
+    for(int i=1;i<n;i++){
+        curr_max=max(arr[i],curr_max+arr[i]);
+        max_so_far=max(max_so_far,curr_max);
+        fn[i]=curr_max;
+    }
+    bw[n-1]=curr_max=max_so_far=arr[n-1];
+    for(int i=n-2;i>=0;i--){
+        curr_max=max(arr[i],curr_max+arr[i]);
+        max_so_far=max(max_so_far,curr_max);
+        bw[i]=curr_max;
+    }
+    for(int i=1;i<n-1;i++){
+        max_so_far=max(max_so_far,fn[i-1]+bw[i+1]);
+    }
+    return max_so_far;
+}
