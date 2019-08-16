@@ -1,0 +1,94 @@
+Time Complexity = O(n*m)               //2d dp vector
+memo solution
+int unionOfStrings(int x,int y,string s1,string s2,vvi &dp){
+    if(x==0) return y;
+    if(y==0) return x;
+    if(dp[x][y]!=-1) return dp[x][y];
+    if(s1[x-1]==s2[y-1]){
+        dp[x][y]=1+unionOfStrings(x-1,y-1,s1,s2,dp);
+    }
+    else{
+        dp[x][y]=1+min(unionOfStrings(x-1,y,s1,s2,dp),unionOfStrings(x,y-1,s1,s2,dp));
+    }
+    return dp[x][y];
+}
+
+
+
+
+
+Table Solution
+int superSeq(char* X, char* Y, int m, int n)
+{
+	int dp[m+1][n+1];
+
+	for (int i = 0; i <= m; i++)
+	{
+		for (int j = 0; j <= n; j++)
+		{
+		if (!i)             // If i is equal to 0, then the dp[i][j] will be equal to size of second string.
+			dp[i][j] = j;
+		else if (!j)
+			dp[i][j] = i;   // If j is equal to 0, then the dp[i][j] will be equal to size of first string.
+		else if (X[i-1] == Y[j-1])
+				dp[i][j] = 1 + dp[i-1][j-1];    // When string1 and string2 char is same, then answer will be 1+ dp[i-1][j-1] 
+		else
+				dp[i][j] = 1 + min(dp[i-1][j], dp[i][j-1]); // Else answer will be 1+ minimum answer without considering the current char of 2 strings
+		}
+	}
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  Template Used
+  #include<bits/stdc++.h>
+#include <boost/multiprecision/cpp_int.hpp> 
+using boost::multiprecision::cpp_int;
+using namespace std;
+
+#define F first
+#define S second
+#define pii pair<int,int>
+#define ppiii pair<pair<int,int>,int>
+#define ppssi pair<pair<string,string>,int>
+#define mkp make_pair
+#define vi vector<int>
+#define vvi vector<vector<int>>
+#define vll vector<long long>
+#define vlli vector<long long int>
+#define vvll vector<vector<long long>>
+#define vvlli vector<vector<long long int>>
+#define vulli vector<unsigned long long int>
+#define vvulli vector<vector<unsigned long long int>>
+#define loopi(i,n) for(int i = 0; i < n; i++)
+#define loopj(j,n) for(int j = 0; j < n; j++)
+#define ll long long
+#define lli long long int 
+#define ulli unsigned long long int
+#define mod 1000000007
+
+int main()
+ {
+	int t;
+	cin>>t;
+	while(t--){
+	    string s1,s2;
+	    cin>>s1>>s2;
+	    vvi dp(s1.size()+1,vector<int>(s2.size()+1,-1));
+		cout<<unionOfStrings(s1.size(),s2.size(),s1,s2,dp)<<endl;
+	}
+	return 0;
+}
