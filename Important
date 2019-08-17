@@ -3,3 +3,6 @@ stringstream geek(str);
         geek >> x;
         sum+=x;
         return;
+
+
+transform(su.begin(),su.end(),su.begin(),::tolower);
