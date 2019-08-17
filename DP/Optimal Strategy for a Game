@@ -1,0 +1,14 @@
+Time  Complexity = O(n*n)                      //time complexity = upper tringular matrix
+long long maximumAmount(int arr[], int n) 
+{
+    vector<vector<long long>>state(n,vector<long long>(n,0));
+    for(int gap=0;gap<n;gap++){
+        for(int j=gap,i=0;j<n;i++,j++){
+            int x=(i+2<=j)?state[i+2][j]:0;
+            int y=(i+1<=j-1)?state[i+1][j-1]:0;
+            int z=(i<=j-2)?state[i][j-2]:0;
+            state[i][j]=max(arr[i]+min(x,y),arr[j]+min(y,z));
+        }
+    }
+    return state[0][n-1];
+}
