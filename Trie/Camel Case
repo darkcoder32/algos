@@ -1,0 +1,68 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+struct TrieNode{
+    TrieNode* child[256];
+    bool endOfWord;
+    TrieNode(){
+        for(int i=0;i<256;i++){
+            child[i]=NULL;
+            endOfWord=false;
+        }
+    }
+};
+// struct compare{
+    bool compare(const pair<string,int> &a,const pair<string,int>&b){
+        if(a.second==b.second){
+            return a.first<b.first;
+        }
+        return a.second<b.second;
+    }
+// };
+void insert(TrieNode* root,string s,string key,int len,int &ans,vector<pair<string,int>>&camel){
+    TrieNode* curr=root;
+    int camelLetters=0;
+    for(int i=0;i<s.size();i++){
+        if(s[i]<'a' || s[i]>'a'+26) camelLetters; 
+        if(s[i]==key[len]){
+            len++;
+            if(len==key.size()){
+                ans=1;
+            }
+        }
+        if(curr->child[s[i]]==NULL){
+            curr->child[s[i]]=new TrieNode();
+        }
+        curr=curr->child[s[i]];
+    }
+    curr->endOfWord=true;
+    if(ans==1) camel.push_back({s,camelLetters});
+}
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
+        TrieNode* root=new TrieNode();
+        vector<string>v(n);
+        for(int i=0;i<n;i++){
+            cin>>v[i];
+        }
+        string key;
+        cin>>key;
+        vector<pair<string,int>>camel;
+        int ans=0;
+        for(int i=0;i<n;i++){
+            insert(root,v[i],key,0,ans,camel);
+        }
+        if(ans==0) cout<<"No match found";
+        else{
+            sort(camel.begin(),camel.end(),compare);
+            for(int i=0;i<camel.size();i++){
+                cout<<camel[i].first<<" ";
+            }
+        }
+        cout<<endl;
+    }
+}
