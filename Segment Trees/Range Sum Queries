@@ -1,0 +1,51 @@
+Time Complexity = O(n) for tree construction 
+                  O(logn) for each query
+                  O(logn) for each update
+
+int getMid(int ss,int se){
+    return ss+(se-ss)/2;
+}
+int constructUtil(int arr[],int ss,int se,int *st,int si){
+    if(ss==se){
+        st[si]=arr[ss];
+        return arr[ss];
+    }
+    int mid=getMid(ss,se);
+    st[si] = constructUtil(arr,ss,mid,st,2*si+1)+
+             constructUtil(arr,mid+1,se,st,2*si+2);
+    return st[si];
+}
+int *constructST(int arr[],int n){
+    int x=(int)(ceil(log2(n)));
+    int max_size=2*(int)pow(2,x)-1;
+    int *st=new int[max_size];
+    constructUtil(arr,0,n-1,st,0);
+    return st;
+}
+int getSumUtil(int *st,int ss,int se,int qs,int qe,int si){
+    if(qs<=ss && qe>=se) return st[si];
+    if(se<qs || ss>qe) return 0;
+    int mid=getMid(ss,se);
+    return getSumUtil(st,ss,mid,qs,qe,2*si+1)+
+           getSumUtil(st,mid+1,se,qs,qe,2*si+2);
+}
+int getSum(int *st,int n,int qs,int qe){
+    if(qs<0 || qe>n-1 || qs>qe)
+        return -1;
+    return getSumUtil(st,0,n-1,qs,qe,0);
+}
+void updateUtil(int *st,int ss,int se,int ind,int diff,int si){
+    if(ind<ss || ind>se) return;
+    st[si]+=diff;
+    if(ss!=se){
+        int mid=getMid(ss,se);
+        updateUtil(st,ss,mid,ind,diff,2*si+1);
+        updateUtil(st,mid+1,se,ind,diff,2*si+2);
+    }
+}
+void update(int arr[],int *st,int n,int ind,int val){
+    if(ind<0 || ind>n-1) return;
+    int diff=val-arr[ind];
+    arr[ind]=val;
+    updateUtil(st,0,n-1,ind,diff,0);
+}
