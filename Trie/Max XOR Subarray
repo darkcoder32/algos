@@ -1,0 +1,94 @@
+Time Complexity = O(n)
+
+struct TrieNode{
+    int value;
+    TrieNode* child[2];
+    TrieNode(){
+        value=0;
+        child[0]=NULL;
+        child[1]=NULL;
+    }
+};
+int query(TrieNode* root,int pre_xor){
+    TrieNode* curr=root;
+    for(int i=INT_SIZE-1;i>=0;i--){
+        bool val=pre_xor & (1<<i);
+        if(curr->child[1-val]!=NULL) curr=curr->child[1-val];
+        else if(curr->child[val]!=NULL) curr=curr->child[val];
+    }
+    return curr->value^pre_xor;
+}
+void insert(TrieNode* root,int pre_xor){
+    TrieNode* curr=root;
+    for(int i=INT_SIZE-1;i>=0;i--){
+        bool val=pre_xor & (1<<i);
+        if(curr->child[val]==NULL){
+            curr->child[val]=new TrieNode();
+        }
+        curr=curr->child[val];
+    }
+    curr->value=pre_xor;
+}
+
+
+
+
+
+
+
+
+
+Template Used
+#include<bits/stdc++.h>
+// #include <boost/multiprecision/cpp_int.hpp> 
+// using boost::multiprecision::cpp_int;
+using namespace std;
+
+#define F first
+#define S second
+#define pii pair<int,int>
+#define ppiii pair<pair<int,int>,int>
+#define ppssi pair<pair<string,string>,int>
+#define mkp make_pair
+#define vi vector<int>
+#define vvi vector<vector<int>>
+#define vll vector<long long>
+#define vlli vector<long long int>
+#define vvll vector<vector<long     long>>
+#define vvlli vector<vector<long long int>>
+#define vulli vector<unsigned long long int>
+#define vvulli vector<vector<unsigned long long int>>
+#define loopi(i,n) for(int i = 0; i < n; i++)
+#define loopj(j,n) for(int j = 0; j < n; j++)
+#define ll long long
+#define lli long long int 
+#define ulli unsigned long long int
+#define mod 1000000007
+#define fi(a,b) for(int i=a;i<b;i++)
+#define fj(a,b) for(int j=a;j<b;j++)
+#define INT_SIZE 32
+
+
+int main()
+ {
+	int t;
+	cin>>t;
+	while(t--){
+	    int n;
+	    cin>>n;
+	    int arr[n];
+		fi(0,n){
+		    cin>>arr[i];
+		}
+		TrieNode* root=new TrieNode();
+		insert(root,0);
+		int result=INT_MIN,pre_xor=0;
+		fi(0,n){
+		    pre_xor=pre_xor^arr[i];
+		    insert(root,pre_xor);
+		    result=max(result,query(root,pre_xor));
+		}
+		cout<<result<<endl;
+	}
+	return 0;
+}
