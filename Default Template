@@ -27,6 +27,7 @@ using namespace std;
 #define fj(a,b) for(int j=a;j<b;j++)
 #define fir(a,b) for(int i=a;i>=0;i--)
 #define fjr(a,b) for(int j=a;j>=0;j--)
+#define ST_SIZE 2*(int)pow(2,(int)(ceil(log2(n))))-1;
 
 int main()
  {
