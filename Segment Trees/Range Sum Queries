@@ -49,3 +49,68 @@ void update(int arr[],int *st,int n,int ind,int val){
     arr[ind]=val;
     updateUtil(st,0,n-1,ind,diff,0);
 }
+
+
+
+
+
+
+
+
+
+Template Used
+
+#include <boost/multiprecision/cpp_int.hpp> 
+using boost::multiprecision::cpp_int;
+using namespace std;
+
+#define F first
+#define S second
+#define pii pair<int,int>
+#define ppiii pair<pair<int,int>,int>
+#define ppssi pair<pair<string,string>,int>
+#define mkp make_pair
+#define vi vector<int>
+#define vvi vector<vector<int>>
+#define vll vector<long long>
+#define vlli vector<long long int>
+#define vvll vector<vector<long long>>
+#define vvlli vector<vector<long long int>>
+#define vulli vector<unsigned long long int>
+#define vvulli vector<vector<unsigned long long int>>
+#define loopi(i,n) for(int i = 0; i < n; i++)
+#define loopj(j,n) for(int j = 0; j < n; j++)
+#define ll long long
+#define lli long long int 
+#define ulli unsigned long long int
+#define mod 1000000007
+#define fi(a,b) for(int i=a;i<b;i++)
+#define fj(a,b) for(int j=a;j<b;j++)
+
+
+int main()
+ {
+	int t;
+	cin>>t;
+	while(t--){
+	    int n,q;
+	    cin>>n>>q;
+		int arr[n];
+		fi(0,n) cin>>arr[i];
+		int *st=constructST(arr,n);
+		while(q--){
+		    string query;
+		    int qs,qe,ind,val;
+		    cin>>query;
+		    if(query=="G"){
+		        cin>>qs>>qe;
+		        cout<<getSum(st,n,qs,qe)<<endl;
+		    }
+		    if(query=="U"){
+		        cin>>ind>>val;
+		        update(arr,st,n,ind,val);
+		    }
+		}
+	}	
+	return 0;
+}
