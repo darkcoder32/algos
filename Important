@@ -1,8 +1,20 @@
-stringstream geek(str);
+1)stringstream geek(str);
         int x=0;
         geek >> x;
         sum+=x;
         return;
 
 
-transform(su.begin(),su.end(),su.begin(),::tolower);
+2)transform(su.begin(),su.end(),su.begin(),::tolower);
+
+3)struct Node{
+    int pairs;
+    int open;
+    int close;
+    Node(){
+        pairs=0;
+        open=0;
+        close=0;
+    }
+};
+vector<Node>st(ST_SIZE);
