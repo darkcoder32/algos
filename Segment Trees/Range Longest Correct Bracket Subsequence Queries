@@ -1,0 +1,125 @@
+Time Complexity = O(q*logn)
+
+struct Node{
+    int pairs;
+    int open;
+    int close;
+    Node(){
+        pairs=0;
+        open=0;
+        close=0;
+    }
+};
+
+int getMid(int ss,int se){
+    return ss+(se-ss)/2;
+}
+Node constructSTUtil(string str,vector<Node>&st,int ss,int se,int si){
+    if(ss==se){
+        st[si].pairs=0;
+        if(str[ss]=='('){
+            st[si].open=1;
+            st[si].close=0;
+        }
+        else if(str[ss]==')'){
+            st[si].close=1;
+            st[si].open=0;
+        }
+        return st[si];
+    }
+    int mid=getMid(ss,se);
+    Node x = constructSTUtil(str,st,ss,mid,2*si+1);
+    Node y = constructSTUtil(str,st,mid+1,se,2*si+2);
+    int mergePairs=min(x.open,y.close);
+    st[si].pairs=x.pairs+y.pairs+mergePairs;
+    st[si].open=x.open+y.open-mergePairs;
+    st[si].close=x.close+y.close-mergePairs;
+    return st[si];
+}
+vector<Node> constructST(string str,int n){
+    int x=(int)(ceil(log2(n)));
+    int ST_SIZE=2*(int)pow(2,x)-1;
+    vector<Node>st(ST_SIZE);
+    constructSTUtil(str,st,0,n-1,0);
+    return st;
+}
+
+Node query(vector<Node>&st,int ss,int se,int qs,int qe,int si){
+    if(qs>se || qe<ss){
+        Node nullNode;
+        return nullNode;
+    }
+    if(qs<=ss && qe>=se) return st[si];
+    int mid=getMid(ss,se);
+    Node left=query(st,ss,mid,qs,qe,2*si+1);
+    Node right=query(st,mid+1,se,qs,qe,2*si+2);
+    Node parentNode;
+    int mergePairs=min(left.open,right.close);
+    parentNode.pairs=left.pairs+right.pairs+mergePairs;
+    parentNode.open=left.open+right.open-mergePairs;
+    parentNode.close=left.close+right.close-mergePairs;
+    return parentNode;
+}
+
+
+
+
+
+
+
+
+
+
+
+Template Used
+
+#include<bits/stdc++.h>
+#include <boost/multiprecision/cpp_int.hpp> 
+using boost::multiprecision::cpp_int;
+using namespace std;
+
+#define F first
+#define S second
+#define pii pair<int,int>
+#define ppiii pair<pair<int,int>,int>
+#define ppssi pair<pair<string,string>,int>
+#define mkp make_pair
+#define vpii vector<pair<int,int>>
+#define vi vector<int>
+#define vvi vector<vector<int>>
+#define vll vector<long long>
+#define vlli vector<long long int>
+#define vvll vector<vector<long long>>
+#define vvlli vector<vector<long long int>>
+#define vulli vector<unsigned long long int>
+#define vvulli vector<vector<unsigned long long int>>
+#define loopi(i,n) for(int i = 0; i < n; i++)
+#define loopj(j,n) for(int j = 0; j < n; j++)
+#define ll long long
+#define lli long long int 
+#define ulli unsigned long long int
+#define mod 1000000007
+#define fi(a,b) for(int i=a;i<b;i++)
+#define fj(a,b) for(int j=a;j<b;j++)
+#define fir(a,b) for(int i=a;i>=0;i--)
+#define fjr(a,b) for(int j=a;j>=0;j--)
+
+
+int main()
+ {
+	int t;
+	cin>>t;
+	while(t--){
+	    string str;
+	    int q;
+	    cin>>str>>q;
+	    int n=str.size();
+		vector<Node>st=constructST(str,n);
+		while(q--){
+		    int qs,qe;
+		    cin>>qs>>qe;
+		    cout<<2*(query(st,0,n-1,qs,qe,0).pairs)<<endl;
+		}
+	}
+	return 0;
+}
