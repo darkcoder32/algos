@@ -9,6 +9,7 @@ using namespace std;
 #define ppiii pair<pair<int,int>,int>
 #define ppssi pair<pair<string,string>,int>
 #define mkp make_pair
+#define vpii vector<pair<int,int>>
 #define vi vector<int>
 #define vvi vector<vector<int>>
 #define vll vector<long long>
@@ -27,7 +28,6 @@ using namespace std;
 #define fj(a,b) for(int j=a;j<b;j++)
 #define fir(a,b) for(int i=a;i>=0;i--)
 #define fjr(a,b) for(int j=a;j>=0;j--)
-#define ST_SIZE 2*(int)pow(2,(int)(ceil(log2(n))))-1;
 
 int main()
  {
