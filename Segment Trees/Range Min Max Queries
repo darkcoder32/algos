@@ -1,8 +1,74 @@
-#include<bits/stdc++.h>
-#include <boost/multiprecision/cpp_int.hpp> 
-using boost::multiprecision::cpp_int;
-using namespace std;
+int getMid(int ss,int se){
+    return ss+(se-ss)/2;
+}
+pii constructSTUtil(int arr[],vpii &st,int ss,int se,int si){
+    if(ss==se){
+        st[si]={arr[ss],arr[ss]};
+        return st[si];
+    }
+    int mid=getMid(ss,se);
+    pii x= constructSTUtil(arr,st,ss,mid,2*si+1);
+    pii y= constructSTUtil(arr,st,mid+1,se,2*si+2);
+    st[si]={min(x.first,y.first),max(x.second,y.second)};
+    return st[si];
+}
+vpii constructST(int arr[],int n){
+    int x=(int)(ceil(log2(n)));
+    int ST_SIZE=2*(int)pow(2,x)-1;
+    vpii st(ST_SIZE);
+    constructSTUtil(arr,st,0,n-1,0);
+    return st;
+}
+void updateUtil(vpii &st,int ss,int se,int ind,int val,int si){
+    if(ind<ss || ind>se) return;
+    
+    if(ss==se){
+        st[si]={val,val};
+        return;
+    }
+    int mid=getMid(ss,se);
+    updateUtil(st,ss,mid,ind,val,2*si+1);
+    updateUtil(st,mid+1,se,ind,val,2*si+2);
+    int x=min(st[2*si+1].first,st[2*si+2].first);
+    int y=max(st[2*si+1].second,st[2*si+2].second);
+    st[si]={x,y};
+}
+void update(int arr[],vpii &st,int n,int ind,int val){
+    if(ind<0 || ind>n-1) return;
+    arr[ind]=val;
+    updateUtil(st,0,n-1,ind,val,0);
+}
+int getMinUtil(vpii &st,int ss,int se,int qs,int qe,int si){
+    if(qs<=ss && qe>=se) return st[si].first;
+    if(qs>se || qe<ss) return INT_MAX;
+    int mid=getMid(ss,se);
+    return min(getMinUtil(st,ss,mid,qs,qe,2*si+1),getMinUtil(st,mid+1,se,qs,qe,2*si+2));
+}
+int getMin(vpii &st,int n,int qs,int qe){
+    if(qs<0 || qe>n-1 || qs>qe) return INT_MAX;
+    return getMinUtil(st,0,n-1,qs,qe,0);
+}
+int getMaxUtil(vpii &st,int ss,int se,int qs,int qe,int si){
+    if(qs<=ss && qe>=se) return st[si].second;
+    if(qs>se || qe<ss) return INT_MIN;
+    int mid=getMid(ss,se);
+    return max(getMaxUtil(st,ss,mid,qs,qe,2*si+1),getMaxUtil(st,mid+1,se,qs,qe,2*si+2));
+}
+int getMax(vpii &st,int n,int qs,int qe){
+    if(qs<0 || qe>n-1 || qs>qe) return INT_MIN;
+    return getMaxUtil(st,0,n-1,qs,qe,0);
+}
 
+
+
+
+
+
+
+Template Used
+
+#include<bits/stdc++.h>
+using namespace std;
 #define F first
 #define S second
 #define pii pair<int,int>
@@ -28,65 +94,8 @@ using namespace std;
 #define fj(a,b) for(int j=a;j<b;j++)
 #define fir(a,b) for(int i=a;i>=0;i--)
 #define fjr(a,b) for(int j=a;j>=0;j--)
-// #define ST_SIZE 2*((int)pow(2,(int)(ceil(log2(n))))-1);
-int getMid(int ss,int se){
-    return ss+(se-ss)/2;
-}
-pii constructSTUtil(int arr[],vpii &st,int ss,int se,int si){
-    if(ss==se){
-        st[si]={arr[ss],arr[ss]};
-        return st[si];
-    }
-    int mid=getMid(ss,se);
-    pii x= constructSTUtil(arr,st,ss,mid,2*si+1);
-    pii y= constructSTUtil(arr,st,mid+1,se,2*si+2);
-    st[si]={min(x.first,y.first),max(x.second,y.second)};
-    return st[si];
-}
-vpii constructST(int arr[],int n){
-    int x=(int)(ceil(log2(n)));
-    int ST_SIZE=2*(int)pow(2,x)-1;
-    vpii st(ST_SIZE);
-    constructSTUtil(arr,st,0,n-1,0);
-    return st;
-}
-void updateUtil(vpii &st,int ss,int se,int ind,int diff,int si){
-    if(ind<ss || ind>se) return;
-    int x=min(st[si].first,diff);
-    int y=max(st[si].second,diff);
-    st[si]={x,y};
-    if(ss!=se){
-        int mid=getMid(ss,se);
-        updateUtil(st,ss,mid,ind,diff,2*si+1);
-        updateUtil(st,mid+1,se,ind,diff,2*si+2);
-    }
-}
-void update(int arr[],vpii &st,int n,int ind,int val){
-    if(ind<0 || ind>n-1) return;
-    int diff=val;
-    arr[ind]=val;
-    updateUtil(st,0,n-1,ind,diff,0);
-}
-int getMinUtil(vpii &st,int ss,int se,int qs,int qe,int si){
-    if(qs<=ss && qe>=se) return st[si].first;
-    if(qs>se || qe<ss) return INT_MAX;
-    int mid=getMid(ss,se);
-    return min(getMinUtil(st,ss,mid,qs,qe,2*si+1),getMinUtil(st,mid+1,se,qs,qe,2*si+2));
-}
-int getMin(vpii &st,int n,int qs,int qe){
-    if(qs<0 || qe>n-1 || qs>qe) return INT_MAX;
-    return getMinUtil(st,0,n-1,qs,qe,0);
-}
-int getMaxUtil(vpii &st,int ss,int se,int qs,int qe,int si){
-    if(qs<=ss && qe>=se) return st[si].second;
-    if(qs>se || qe<ss) return INT_MIN;
-    int mid=getMid(ss,se);
-    return max(getMaxUtil(st,ss,mid,qs,qe,2*si+1),getMaxUtil(st,mid+1,se,qs,qe,2*si+2));
-}
-int getMax(vpii &st,int n,int qs,int qe){
-    if(qs<0 || qe>n-1 || qs>qe) return INT_MIN;
-    return getMaxUtil(st,0,n-1,qs,qe,0);
-}
+
+
 int main()
  {
 	int t;
