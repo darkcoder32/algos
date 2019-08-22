@@ -1,0 +1,117 @@
+Time Complexity = O(n+q*logn*logn)         //as gcd runs in logn
+
+int getMid(int ss,int se){
+    return ss+(se-ss)/2;
+}
+int gcd(int a,int b){
+    if(b==0) return a;
+    return gcd(b,a%b);
+}
+int query(vi &st,int ss,int se,int qs,int qe,int si){
+    if(qs>se || qe<ss) return 0;
+    if(qs<=ss && qe>=se) return st[si];
+    int mid=getMid(ss,se);
+    int left=query(st,ss,mid,qs,qe,2*si+1);
+    int right=query(st,mid+1,se,qs,qe,2*si+2);
+    return gcd(left,right);
+}
+void updateUtil(vi &st,int ss,int se,int ind,int val,int si){
+    if(ind<ss || ind>se) return;
+    
+    if(ss==se){
+        st[si]=val;
+        return;
+    }
+    int mid=getMid(ss,se);
+    updateUtil(st,ss,mid,ind,val,2*si+1);
+    updateUtil(st,mid+1,se,ind,val,2*si+2);
+    st[si]=gcd(st[2*si+1],st[2*si+2]);
+}
+void update(int arr[],vi &st,int n,int ind,int val){
+    if(ind<0 || ind>n-1) return;
+    arr[ind]=val;
+    updateUtil(st,0,n-1,ind,val,0);
+}
+int constructSTUtil(int arr[],vi &st,int ss,int se,int si){
+    if(ss==se){
+        st[si]=arr[ss];
+        return st[si];
+    }
+    int mid=getMid(ss,se);
+    int x= constructSTUtil(arr,st,ss,mid,2*si+1);
+    int y= constructSTUtil(arr,st,mid+1,se,2*si+2);
+    st[si]=gcd(x,y);
+    return st[si];
+}
+vi constructST(int arr[],int n){
+    int x=(int)(ceil(log2(n)));
+    int ST_SIZE=2*(int)pow(2,x)-1;
+    vi st(ST_SIZE);
+    constructSTUtil(arr,st,0,n-1,0);
+    return st;
+}
+
+
+
+
+
+
+
+
+
+Template Used
+
+#include<bits/stdc++.h>
+#include <boost/multiprecision/cpp_int.hpp> 
+using boost::multiprecision::cpp_int;
+using namespace std;
+
+#define F first
+#define S second
+#define pii pair<int,int>
+#define ppiii pair<pair<int,int>,int>
+#define ppssi pair<pair<string,string>,int>
+#define mkp make_pair
+#define vi vector<int>
+#define vvi vector<vector<int>>
+#define vll vector<long long>
+#define vlli vector<long long int>
+#define vvll vector<vector<long long>>
+#define vvlli vector<vector<long long int>>
+#define vulli vector<unsigned long long int>
+#define vvulli vector<vector<unsigned long long int>>
+#define loopi(i,n) for(int i = 0; i < n; i++)
+#define loopj(j,n) for(int j = 0; j < n; j++)
+#define ll long long
+#define lli long long int 
+#define ulli unsigned long long int
+#define mod 1000000007
+#define fi(a,b) for(int i=a;i<b;i++)
+#define fj(a,b) for(int j=a;j<b;j++)
+
+
+int main()
+ {
+	int t;
+	cin>>t;
+	while(t--){
+	    int n,q;
+	    cin>>n>>q;
+	    int arr[n];
+		fi(0,n) cin>>arr[i];
+		vi st=constructST(arr,n);
+		while(q--){
+		    int type,qs,qe,ind,val;
+		    cin>>type;
+		    if(type==0){
+		        cin>>qs>>qe;
+		        cout<<query(st,0,n-1,qs,qe,0)<<endl;
+		    }
+		    else if(type==1){
+		        cin>>ind>>val;
+		        update(arr,st,n,ind,val);
+		    }
+		}
+	}
+	return 0;
+}
