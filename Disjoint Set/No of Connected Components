@@ -1,0 +1,9 @@
+Time Complexity = O(n)
+
+int findNumberOfConnectedNodes( int n, int par[], int rank[]) {
+    int ans=0;
+    for(int i=1;i<=n;i++){
+        if(par[i]==i) ans++;
+    }
+    return ans;
+}
