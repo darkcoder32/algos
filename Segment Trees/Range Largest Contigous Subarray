@@ -1,0 +1,141 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define F first
+#define S second
+#define pii pair<int,int>
+#define ppiii pair<pair<int,int>,int>
+#define ppssi pair<pair<string,string>,int>
+#define mkp make_pair
+#define vi vector<int>
+#define vvi vector<vector<int>>
+#define vll vector<long long>
+#define vlli vector<long long int>
+#define vvll vector<vector<long long>>
+#define vvlli vector<vector<long long int>>
+#define vulli vector<unsigned long long int>
+#define vvulli vector<vector<unsigned long long int>>
+#define loopi(i,n) for(int i = 0; i < n; i++)
+#define loopj(j,n) for(int j = 0; j < n; j++)
+#define ll long long
+#define lli long long int 
+#define ulli unsigned long long int
+#define mod 1000000007
+#define fi(a,b) for(int i=a;i<b;i++)
+#define fj(a,b) for(int j=a;j<b;j++)
+
+struct Node{
+    int totalSum;
+    int prefixSum;
+    int suffixSum;
+    int maxSum;
+};
+int getMid(int ss,int se){
+    return ss+(se-ss)/2;
+}
+Node query(vector<Node> &st,int ss,int se,int qs,int qe,int si){
+    if(qs>se || qe<ss) {
+        Node nullNode;
+        nullNode.totalSum=nullNode.prefixSum=nullNode.suffixSum=nullNode.maxSum=-100000;
+        return nullNode;
+    }
+    if(qs<=ss && qe>=se) return st[si];
+    int mid=getMid(ss,se);
+    Node left=query(st,ss,mid,qs,qe,2*si+1);
+    Node right=query(st,mid+1,se,qs,qe,2*si+2);
+    Node parent;
+    parent.totalSum=left.totalSum+right.totalSum;
+    parent.prefixSum=max(left.prefixSum,left.totalSum+right.prefixSum);
+    parent.suffixSum=max(left.suffixSum+right.totalSum,right.suffixSum);
+    parent.maxSum=max(parent.prefixSum,max(parent.suffixSum,max(left.suffixSum+right.prefixSum,max(left.maxSum,right.maxSum))));
+    st[si]=parent;
+    return st[si];
+}
+void updateUtil(vector<Node> &st,int ss,int se,int ind,int val,int si){
+    if(ind<ss || ind>se) return;
+    
+    if(ss==se){
+        st[si].totalSum=st[si].prefixSum=st[si].suffixSum=st[si].maxSum=val;
+        return ;
+    }
+    int mid=getMid(ss,se);
+    updateUtil(st,ss,mid,ind,val,2*si+1);
+    updateUtil(st,mid+1,se,ind,val,2*si+2);
+    Node parent;
+    parent.totalSum=st[2*si+1].totalSum+st[2*si+2].totalSum;
+    parent.prefixSum=max(st[2*si+1].prefixSum,st[2*si+1].totalSum+st[2*si+2].prefixSum);
+    parent.suffixSum=max(st[2*si+1].suffixSum+st[2*si+2].totalSum,st[2*si+2].suffixSum);
+    parent.maxSum=max(parent.prefixSum,max(parent.suffixSum,max(st[2*si+1].suffixSum+st[2*si+2].prefixSum,max(st[2*si+1].maxSum,st[2*si+2].maxSum))));
+    st[si]=parent;
+}
+void update(int arr[],vector<Node> &st,int n,int ind,int val){
+    if(ind<0 || ind>n-1) return;
+    arr[ind]=val;
+    updateUtil(st,0,n-1,ind,val,0);
+}
+Node constructSTUtil(int arr[],vector<Node> &st,int ss,int se,int si){
+    if(ss==se){
+        st[si].totalSum=st[si].prefixSum=st[si].suffixSum=st[si].maxSum=arr[ss];
+        return st[si];
+    }
+    int mid=getMid(ss,se);
+    Node left= constructSTUtil(arr,st,ss,mid,2*si+1);
+    Node right= constructSTUtil(arr,st,mid+1,se,2*si+2);
+    Node parent;
+    parent.totalSum=left.totalSum+right.totalSum;
+    parent.prefixSum=max(left.prefixSum,left.totalSum+right.prefixSum);
+    parent.suffixSum=max(left.suffixSum+right.totalSum,right.suffixSum);
+    parent.maxSum=max(parent.prefixSum,max(parent.suffixSum,max(left.suffixSum+right.prefixSum,max(left.maxSum,right.maxSum))));
+    st[si]=parent;
+    return st[si];
+}
+vector<Node> constructST(int arr[],int n){
+    int x=(int)(ceil(log2(n)));
+    int ST_SIZE=2*(int)pow(2,x)-1;
+    vector<Node> st(ST_SIZE);
+    constructSTUtil(arr,st,0,n-1,0);
+    return st;
+}
+int main()
+ {
+	int t;
+	cin>>t;
+	while(t--){
+	    int n,q;
+	    cin>>n>>q;
+	    int arr[n];
+		fi(0,n) cin>>arr[i];
+		vector<Node>st=constructST(arr,n);
+// 		fi(0,st.size()) cout<<st[i].totalSum<<" "<<st[i].prefixSum<<" "<<st[i].suffixSum<<" "<<st[i].maxSum<<endl;
+		while(q--){
+		    int type,qs,qe,ind,val;
+		    cin>>type;
+		    if(type==1){
+		        cin>>qs>>qe;
+		        qs--;qe--;
+		        cout<<query(st,0,n-1,qs,qe,0).maxSum<<endl;
+		    }
+		    else if(type==2){
+		        cin>>ind>>val;
+		        ind--;
+		        update(arr,st,n,ind,val);
+		    }
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	return 0;
+}
