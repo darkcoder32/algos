@@ -1,0 +1,44 @@
+Time Complexity = O(V+E)       if find and union is O(1)
+
+int find(int a,int par[]){                                //path compression
+    if(par[a]==a) return a;
+    int rep=find(par[a],par);
+    par[a]=rep;
+    return rep;
+}
+
+void union_( int a, int b, int par[], int rank1[]) {      //union by rank
+    int sa=find(a,par);
+    int sb=find(b,par);
+    if(sa==sb) return;
+    if(rank1[sa]>rank1[sb]){
+        par[sb]=sa;
+    }
+    else if(rank1[sb]>rank1[sa]){
+        par[sa]=sb;
+    }
+    else{
+        par[sa]=sb;
+        rank1[sb]++;
+    }
+}
+bool findCycle(vector<int> adj[], int par[], int rank[], int n, int e){
+    
+    map<pair<int,int>,int>vis;
+    for(int i=1;i<=n;i++){
+        for(int j=0;j<adj[i].size();j++){
+            int u=i;
+            int v=adj[i][j];
+            if(vis[{u,v}]==0){
+                if(find(u,par)==find(v,par)) return true;
+                else{
+                    vis[{u,v}]=1;
+                    vis[{v,u}]=1;
+                    union_(u,v,par,rank);                
+                    
+                }
+            }
+        }
+    }
+    return false;
+}
