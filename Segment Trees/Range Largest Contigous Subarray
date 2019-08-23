@@ -1,28 +1,4 @@
-#include<bits/stdc++.h>
-using namespace std;
-
-#define F first
-#define S second
-#define pii pair<int,int>
-#define ppiii pair<pair<int,int>,int>
-#define ppssi pair<pair<string,string>,int>
-#define mkp make_pair
-#define vi vector<int>
-#define vvi vector<vector<int>>
-#define vll vector<long long>
-#define vlli vector<long long int>
-#define vvll vector<vector<long long>>
-#define vvlli vector<vector<long long int>>
-#define vulli vector<unsigned long long int>
-#define vvulli vector<vector<unsigned long long int>>
-#define loopi(i,n) for(int i = 0; i < n; i++)
-#define loopj(j,n) for(int j = 0; j < n; j++)
-#define ll long long
-#define lli long long int 
-#define ulli unsigned long long int
-#define mod 1000000007
-#define fi(a,b) for(int i=a;i<b;i++)
-#define fj(a,b) for(int j=a;j<b;j++)
+Time Complexity = O(n) for build and O(logn) for query
 
 struct Node{
     int totalSum;
@@ -36,7 +12,7 @@ int getMid(int ss,int se){
 Node query(vector<Node> &st,int ss,int se,int qs,int qe,int si){
     if(qs>se || qe<ss) {
         Node nullNode;
-        nullNode.totalSum=nullNode.prefixSum=nullNode.suffixSum=nullNode.maxSum=-100000;
+        nullNode.totalSum=nullNode.prefixSum=nullNode.suffixSum=nullNode.maxSum=-1000000;
         return nullNode;
     }
     if(qs<=ss && qe>=se) return st[si];
@@ -48,8 +24,7 @@ Node query(vector<Node> &st,int ss,int se,int qs,int qe,int si){
     parent.prefixSum=max(left.prefixSum,left.totalSum+right.prefixSum);
     parent.suffixSum=max(left.suffixSum+right.totalSum,right.suffixSum);
     parent.maxSum=max(parent.prefixSum,max(parent.suffixSum,max(left.suffixSum+right.prefixSum,max(left.maxSum,right.maxSum))));
-    st[si]=parent;
-    return st[si];
+    return parent;
 }
 void updateUtil(vector<Node> &st,int ss,int se,int ind,int val,int si){
     if(ind<ss || ind>se) return;
@@ -85,7 +60,10 @@ Node constructSTUtil(int arr[],vector<Node> &st,int ss,int se,int si){
     parent.totalSum=left.totalSum+right.totalSum;
     parent.prefixSum=max(left.prefixSum,left.totalSum+right.prefixSum);
     parent.suffixSum=max(left.suffixSum+right.totalSum,right.suffixSum);
-    parent.maxSum=max(parent.prefixSum,max(parent.suffixSum,max(left.suffixSum+right.prefixSum,max(left.maxSum,right.maxSum))));
+    parent.maxSum=max(parent.prefixSum,
+                  max(parent.suffixSum,
+                  max(left.suffixSum+right.prefixSum,
+                  max(left.maxSum,right.maxSum))));
     st[si]=parent;
     return st[si];
 }
@@ -96,6 +74,44 @@ vector<Node> constructST(int arr[],int n){
     constructSTUtil(arr,st,0,n-1,0);
     return st;
 }
+
+
+
+
+
+
+
+
+
+
+Template Used
+
+#include<bits/stdc++.h>
+using namespace std;
+
+#define F first
+#define S second
+#define pii pair<int,int>
+#define ppiii pair<pair<int,int>,int>
+#define ppssi pair<pair<string,string>,int>
+#define mkp make_pair
+#define vi vector<int>
+#define vvi vector<vector<int>>
+#define vll vector<long long>
+#define vlli vector<long long int>
+#define vvll vector<vector<long long>>
+#define vvlli vector<vector<long long int>>
+#define vulli vector<unsigned long long int>
+#define vvulli vector<vector<unsigned long long int>>
+#define loopi(i,n) for(int i = 0; i < n; i++)
+#define loopj(j,n) for(int j = 0; j < n; j++)
+#define ll long long
+#define lli long long int 
+#define ulli unsigned long long int
+#define mod 1000000007
+#define fi(a,b) for(int i=a;i<b;i++)
+#define fj(a,b) for(int j=a;j<b;j++)
+
 int main()
  {
 	int t;
@@ -106,7 +122,6 @@ int main()
 	    int arr[n];
 		fi(0,n) cin>>arr[i];
 		vector<Node>st=constructST(arr,n);
-// 		fi(0,st.size()) cout<<st[i].totalSum<<" "<<st[i].prefixSum<<" "<<st[i].suffixSum<<" "<<st[i].maxSum<<endl;
 		while(q--){
 		    int type,qs,qe,ind,val;
 		    cin>>type;
@@ -122,20 +137,5 @@ int main()
 		    }
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	return 0;
 }
