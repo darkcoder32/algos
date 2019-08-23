@@ -1,0 +1,23 @@
+Time Complexity = Amortized O(1)      
+
+int find(int a,int par[]){                                //path compression
+    if(par[a]==a) return a;
+    int rep=find(par[a],par);
+    par[a]=rep;
+    return rep;
+}
+
+void union_( int a, int b, int par[], int rank1[]) {      //union by rank
+    int sa=find(a,par);
+    int sb=find(b,par);
+    if(sa==sb) return;
+    if(rank1[sa]>rank1[sb]){
+        par[sb]=sa;
+    }
+    else if(rank1[sb]>rank1[sa]){
+        par[sa]=sb;
+    }
+    else{
+        par[sa]=sb;
+    }
+}
