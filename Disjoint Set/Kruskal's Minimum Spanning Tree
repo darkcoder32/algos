@@ -1,0 +1,64 @@
+Time Complexity = E*logE
+
+struct Edge{
+    int u,v;
+    long long int wet;
+};
+bool compare(const Edge &a,const Edge &b){
+    return a.wet>b.wet;
+}
+int find(int a,int par[]){                                //path compression
+    if(par[a]==a) return a;
+    int rep=find(par[a],par);
+    par[a]=rep;
+    return rep;
+}
+
+void union_( int a, int b, int par[], int rank1[]) {      //union by rank
+    int sa=find(a,par);
+    int sb=find(b,par);
+    if(sa==sb) return;
+    if(rank1[sa]>rank1[sb]){
+        par[sb]=sa;
+    }
+    else if(rank1[sb]>rank1[sa]){
+        par[sa]=sb;
+    }
+    else{
+        par[sa]=sb;
+        rank1[sb]++;
+    }
+}
+long long int kruskalDSU(vector<pair<int, long long int>> adj[], int n, int m) {
+    vector<Edge>edges;
+    map<pair<int,int>,int>mp;
+    int par[n+1];
+    int rank[n+1];
+    for(int i=1;i<=n;i++){
+        par[i]=i;
+        rank[i]=0;
+        for(int j=0;j<adj[i].size();j++){
+            Edge x;
+            x.u=i;
+            x.v=adj[i][j].first;
+            x.wet=adj[i][j].second;
+            edges.push_back(x);
+        }
+    }
+    sort(edges.begin(),edges.end(),compare);
+    vector<Edge>MST;
+    long long int ans=0;
+    while(MST.size()!=n-1){
+        Edge x=edges.back();
+        edges.pop_back();
+        if(mp[{x.u,x.v}]==1) continue;
+        if(find(x.u,par)!=find(x.v,par)){
+            MST.push_back(x);
+            union_(x.u,x.v,par,rank);
+            ans+=x.wet;
+        }
+        mp[{x.u,x.v}]=1;
+        mp[{x.v,x.u}]=1;
+    }
+    return ans;
+}
