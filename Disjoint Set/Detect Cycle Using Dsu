@@ -1,4 +1,4 @@
-Time Complexity = O(V+E)       if find and union is O(1)
+Time Complexity = O(V*E)       if find and union is O(1)
 
 int find(int a,int par[]){                                //path compression
     if(par[a]==a) return a;
