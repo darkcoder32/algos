@@ -19,5 +19,6 @@ void union_( int a, int b, int par[], int rank1[]) {      //union by rank
     }
     else{
         par[sa]=sb;
+        rank1[sb]++;
     }
 }
