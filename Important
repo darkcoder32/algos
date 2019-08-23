@@ -20,3 +20,7 @@
 vector<Node>st(ST_SIZE);
 
 4)map<pair<int,int>,int>  works but  unordered_map<pair<int,int>,int> does not
+
+5)vector<int>v;
+  v.back() =>last element
+  v.pop_back => removes last element
