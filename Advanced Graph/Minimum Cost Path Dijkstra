@@ -1,0 +1,95 @@
+Time Complexity = O(M*N*log(M*N))
+
+struct Node{
+    int x,y;
+};
+bool safe(int r,int c,int n){
+    if(r>=0 && r<n && c>=0 && c<n) return true;
+    return false;
+}
+int dijkstra(vvi &grid,int V){
+    vvi vis(V,vi(V,0));
+    vvi dis(V,vi(V,INT_MAX));
+    dis[0][0]=grid[0][0];
+    int row[]={-1,0,0,1};
+    int col[]={0,-1,1,0};
+    priority_queue<pair<int,pii>,vector<pair<int,pii>>,greater<pair<int,pii>>>pq;
+    pq.push({grid[0][0],{0,0}});
+    fi(0,V){
+        fj(0,V){
+            int minVertexI,minVertexJ;
+            pair<int,pii> tmp = pq.top();pq.pop();
+            minVertexI=tmp.second.first;
+            minVertexJ=tmp.second.second;
+            vis[minVertexI][minVertexJ]=1;
+            for(int k=0;k<4;k++){
+                int r=minVertexI+row[k];
+                int c=minVertexJ+col[k];
+                if(safe(r,c,V) && !vis[r][c]){
+                    if(dis[r][c]>dis[minVertexI][minVertexJ]+grid[r][c]){
+                        dis[r][c]=dis[minVertexI][minVertexJ]+grid[r][c];
+                        pq.push({dis[r][c],{r,c}});
+                    }
+                }
+            }
+        }
+    }
+    return dis[V-1][V-1];
+}
+
+
+
+
+
+
+
+
+
+Template Used
+
+#include<bits/stdc++.h>
+#include <boost/multiprecision/cpp_int.hpp> 
+using boost::multiprecision::cpp_int;
+using namespace std;
+
+#define F first
+#define S second
+#define pii pair<int,int>
+#define ppiii pair<pair<int,int>,int>
+#define ppssi pair<pair<string,string>,int>
+#define mkp make_pair
+#define vi vector<int>
+#define vvi vector<vector<int>>
+#define vll vector<long long>
+#define vlli vector<long long int>
+#define vvll vector<vector<long long>>
+#define vvlli vector<vector<long long int>>
+#define vulli vector<unsigned long long int>
+#define vvulli vector<vector<unsigned long long int>>
+#define loopi(i,n) for(int i = 0; i < n; i++)
+#define loopj(j,n) for(int j = 0; j < n; j++)
+#define ll long long
+#define lli long long int 
+#define ulli unsigned long long int
+#define mod 1000000007
+#define fi(a,b) for(int i=a;i<b;i++)
+#define fj(a,b) for(int j=a;j<b;j++)
+
+
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--){
+	    int n;
+	    cin>>n;
+	    vvi grid(n,vi(n));
+		fi(0,n){
+		    fj(0,n){
+		       cin>>grid[i][j]; 
+		    }
+		}
+		cout<<dijkstra(grid,n)<<endl;
+	}
+	return 0;
+}
