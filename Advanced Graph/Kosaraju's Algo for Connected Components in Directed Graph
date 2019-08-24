@@ -1,0 +1,52 @@
+Time Complexity = O(V+E)
+
+void dfs(int src,vector<int>adj[],vector<int>&vis,stack<int>&s){
+    if(vis[src]) return;
+    vis[src]=1;
+    for(int i=0;i<adj[src].size();i++){
+        if(!vis[adj[src][i]]){
+            dfs(adj[src][i],adj,vis,s);
+        }
+    }
+    s.push(src);
+}
+void dfs(int src,vector<int>revAdj[],vector<int>&visited){
+    if(visited[src]) return;
+    visited[src]=1;
+    for(int i=0;i<revAdj[src].size();i++){
+        if(!visited[revAdj[src][i]]){
+            dfs(revAdj[src][i],revAdj,visited);
+        }
+    }
+}
+void reverseEdges(vector<int>adj[],int V,vector<int>revAdj[]){
+    for(int i=0;i<V;i++){
+        for(int j=0;j<adj[i].size();j++){
+            int u=i;
+            int v=adj[i][j];
+            revAdj[v].push_back(u);
+        }
+    }
+}
+int kosaraju(int V, vector<int> adj[])
+{
+    stack<int>s;
+    vector<int>vis(V,0);
+    for(int i=0;i<V;i++){
+        if(!vis[i]){
+            dfs(i,adj,vis,s);
+        }
+    }
+    vector<int>revAdj[V];
+    reverseEdges(adj,V,revAdj);
+    vector<int>visited(V,0);
+    int ans=0;
+    while(!s.empty()){
+        int src=s.top();s.pop();
+        if(!visited[src]){
+            ans++;
+            dfs(src,revAdj,visited);
+        }
+    }
+    return ans;
+}
