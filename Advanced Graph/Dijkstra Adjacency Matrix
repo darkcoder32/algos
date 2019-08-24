@@ -1,0 +1,30 @@
+Time Complexity = o(V*V)
+
+int findMinVertex(vector<int>&dis,vector<int>&vis,int n){
+    int minVertex=-1;
+    for(int i=0;i<n;i++){
+        if(!vis[i] && (minVertex==-1 || dis[i]<dis[minVertex])){
+            minVertex=i;
+        }
+    }
+    return minVertex;
+}
+void dijkstra(vector<vector<int>> graph, int src, int V)
+{
+    vector<int>dis(V,INT_MAX);
+    vector<int>vis(V,0);
+    dis[src]=0;
+    for(int i=0;i<V-1;i++){
+        int minVertex=findMinVertex(dis,vis,V);
+        vis[minVertex]=1;
+        for(int j=0;j<V;j++){
+            if(!vis[j] && graph[minVertex][j]!=0){
+                int dist=dis[minVertex]+graph[minVertex][j];
+                if(dist<dis[j]){
+                    dis[j]=dist;
+                }
+            }
+        }
+    }
+    for(int i=0;i<V;i++) cout<<dis[i]<<" ";
+}
