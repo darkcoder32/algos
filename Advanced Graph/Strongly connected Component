@@ -1,0 +1,30 @@
+Time Complexity = O(V+E)
+
+void find(vector<int> adj[], stack<int> &st, int disc[], int low[], bool onstack[], int u){
+    
+    static int time=0;
+    onstack[u]=true;
+    disc[u]=low[u]=++time;
+    st.push(u);
+    for(int it=0;it<adj[u].size();it++){
+        int v=adj[u][it];
+        if(disc[v]==-1){
+            find(adj,st,disc,low,onstack,v);
+            low[u]=min(low[v],low[u]);
+        }
+        else if(onstack[v]==true){
+            low[u]=min(disc[v],low[u]);
+        }
+    }
+    int w=0;
+    if(low[u]==disc[u]){
+        while(st.top()!=u){
+            w=st.top();st.pop();
+            onstack[w]=false;
+            cout<<w<<" ";
+        }
+        w=st.top();st.pop();
+        onstack[w]=false;
+        cout<<w<<",";
+    }
+}
