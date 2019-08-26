@@ -1,0 +1,39 @@
+Time Complexity = O(V+E)
+
+void bridgeUtil(int u,vector<int>&vis,vector<int>&disc,vector<int>&low,vector<int>&parent,list<int>*adj,int x,int y,bool &ans){
+    static int time=0;
+    vis[u]=1;
+    low[u]=disc[u]=++time;
+    list<int>::iterator it;
+    for(it=adj[u].begin();it!=adj[u].end();it++){
+        int v=*it;
+        if(!vis[v]){
+            parent[v]=u;
+            bridgeUtil(v,vis,disc,low,parent,adj,x,y,ans);
+            low[u]=min(low[u],low[v]);
+            if((u==x && v==y) || (v==x && u==y)){
+                if(low[v]>disc[u]) ans=true;
+            }
+        }
+        else if(v!=parent[u]){
+            low[u]=min(disc[v],low[u]);
+        }
+    }
+}
+bool Graph::isBridge(int u, int v )
+{
+  //Code here
+  vector<int>parent(V,-1);
+  vector<int>disc(V);
+  vector<int>low(V);
+  vector<int>vis(V,0);
+  bool ans=false;
+  for(int i=0;i<V;i++){
+      if(!vis[i]){
+          bridgeUtil(i,vis,disc,low,parent,adj,u,v,ans);
+      }
+  }
+  return !ans;
+//   if(low[v]>disc[u]) return true;
+//   return false;
+}
