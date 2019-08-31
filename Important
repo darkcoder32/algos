@@ -24,3 +24,8 @@ vector<Node>st(ST_SIZE);
 5)vector<int>v;
   v.back() =>last element
   v.pop_back => removes last element
+
+
+6) cout << accumulate(a , a+3 , sum);
+
+7) partial_sum(a , a+5 , b); 
