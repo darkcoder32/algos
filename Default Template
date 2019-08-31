@@ -28,9 +28,12 @@ using namespace std;
 #define fj(a,b) for(int j=a;j<b;j++)
 #define fir(a,b) for(int i=a;i>=0;i--)
 #define fjr(a,b) for(int j=a;j>=0;j--)
-
+#define pb push_back
 int main()
  {
+ 	ios_base::sync_with_stdio(false);
+    	cin.tie(NULL);
+    	cout.tie(NULL);
 	int t;
 	cin>>t;
 	while(t--){
