@@ -25,7 +25,11 @@ vector<Node>st(ST_SIZE);
   v.back() =>last element
   v.pop_back => removes last element
 
-
 6) cout << accumulate(a , a+3 , sum);
 
 7) partial_sum(a , a+5 , b); 
+
+8) bool val = next_permutation(s.begin(),s.end());
+   The function is next_permutation(a.begin(), a.end()). It returns ‘true’ if the function could rearrange the object as a lexicographically greater permutation. Otherwise, the function returns ‘false’.
+
+9) string s = string(n, abc[0])         //gives s=n*abc[0]
